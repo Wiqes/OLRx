@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ToolbarModule } from './toolbar/toolbar.module';
+import { MenuModule } from './menu/menu.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         MatNativeDateModule,
         ReactiveFormsModule,
         ToolbarModule,
+        MenuModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],

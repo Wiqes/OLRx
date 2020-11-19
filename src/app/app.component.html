@@ -1,14 +1,7 @@
 <app-toolbar [menuContainer]="menu"></app-toolbar>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>perm_identity</mat-icon>
-      <span>My profile</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>local_shipping</mat-icon>
-      <span>OLRx Delivery</span>
-    </button>
-  </mat-menu>
+<mat-menu #menu="matMenu">
+  <app-menu></app-menu>
+</mat-menu>
 
 <div class="main-content">
   <div>Content</div>
