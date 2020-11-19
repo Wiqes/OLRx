@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Poster {
-    title: string;
-    sellerName: string;
-    price: number;
-    description: string;
-}
+import { Poster } from './poster/poster.component';
 
 @Component({
     selector: 'app-posters',
