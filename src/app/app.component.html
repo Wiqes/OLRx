@@ -1,7 +1,7 @@
 <app-toolbar [menuContainer]="menu"></app-toolbar>
 <mat-menu #menu="matMenu">
-  <app-menu></app-menu>
+    <app-menu></app-menu>
 </mat-menu>
 <div [@routeAnimation]="getAnimationData(routerOutlet)">
-  <router-outlet #routerOutlet="outlet"></router-outlet>
+    <router-outlet #routerOutlet="outlet"></router-outlet>
 </div>
