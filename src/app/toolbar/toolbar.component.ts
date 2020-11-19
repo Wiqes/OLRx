@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-toolbar',
@@ -8,5 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class ToolbarComponent implements OnInit {
     constructor() {}
 
+    @Output() toggledSidenav = new EventEmitter();
+
     ngOnInit(): void {}
+
+    toggleSidenav(): void {
+        this.toggledSidenav.emit();
+    }
 }

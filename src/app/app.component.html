@@ -1,2 +1,10 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (toggledSidenav)="onToggleSidenav(drawer)"></app-toolbar>
+<mat-drawer-container class="drawer-container" autosize>
+<mat-drawer #drawer class="sidenav" mode="side">
+  <p>Auto-resizing sidenav</p>
+</mat-drawer>
+<div class="sidenav-content">
+  <div>Content</div>
+</div>
 
+</mat-drawer-container>
