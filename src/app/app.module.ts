@@ -9,6 +9,7 @@ import { MaterialModule } from './material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ToolbarModule } from './toolbar/toolbar.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { MatNativeDateModule } from '@angular/material/core';
         MaterialModule,
         MatNativeDateModule,
         ReactiveFormsModule,
+        ToolbarModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],
