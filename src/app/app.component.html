@@ -1,10 +1,15 @@
-<app-toolbar (toggledSidenav)="onToggleSidenav(drawer)"></app-toolbar>
-<mat-drawer-container class="drawer-container" autosize>
-<mat-drawer #drawer class="sidenav" mode="side">
-  <p>Auto-resizing sidenav</p>
-</mat-drawer>
-<div class="sidenav-content">
+<app-toolbar [menuContainer]="menu"></app-toolbar>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>perm_identity</mat-icon>
+      <span>My profile</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>local_shipping</mat-icon>
+      <span>OLRx Delivery</span>
+    </button>
+  </mat-menu>
+
+<div class="main-content">
   <div>Content</div>
 </div>
-
-</mat-drawer-container>
