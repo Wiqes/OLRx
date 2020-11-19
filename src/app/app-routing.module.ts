@@ -4,8 +4,8 @@ import { PostersComponent } from './main-content/posters/posters.component';
 import { ProfileComponent } from './main-content/profile/profile.component';
 
 const routes: Routes = [
-    { path: 'posters', component: PostersComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'posters', component: PostersComponent, data: { animation: 'posters' } },
+    { path: 'profile', component: ProfileComponent, data: { animation: 'profile' } },
 ];
 
 @NgModule({
