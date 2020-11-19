@@ -13,6 +13,7 @@ import { ToolbarModule } from './toolbar/toolbar.module';
 import { MenuModule } from './menu/menu.module';
 import { PostersModule } from './main-content/posters/posters.module';
 import { ProfileModule } from './main-content/profile/profile.module';
+import { DeliveryModule } from './main-content/delivery/delivery.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { ProfileModule } from './main-content/profile/profile.module';
         MenuModule,
         PostersModule,
         ProfileModule,
+        DeliveryModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],

@@ -1,7 +1,7 @@
 import { trigger, animateChild, group, transition, animate, style, query } from '@angular/animations';
 
 export const slideInAnimation = trigger('routeAnimation', [
-    transition('profile <=> posters', [
+    transition('profile <=> posters, profile <=> delivery, posters <=> delivery', [
         style({ position: 'relative' }),
         query(':enter, :leave', [
             style({

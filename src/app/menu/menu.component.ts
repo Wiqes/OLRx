@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
         this.router.navigate(['/profile']);
     }
 
-    onPostersClick(): void {
-        this.router.navigate(['/posters']);
+    onDeliveryClick(): void {
+        this.router.navigate(['/delivery']);
     }
 }
