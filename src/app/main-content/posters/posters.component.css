@@ -1,8 +1,12 @@
 .main-content {
-  display: flex;
   height: auto;
   min-height: 1200px;
-  align-items: center;
-  justify-content: center;
   background: #fafafa;
+  padding-top: 50px;
+}
+
+.mat-card {
+  margin: 50px;
+  height: auto;
+  width: auto;
 }
