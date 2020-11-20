@@ -1,0 +1,17 @@
+<mat-card class="mat-card">
+    <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>{{ poster.title }}</mat-card-title>
+        <mat-card-subtitle>{{ poster.sellerName }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
+    <mat-card-content>
+        <p>
+            {{ poster.description }}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>{{ poster.price }} $</button>
+        <button mat-button>Buy</button>
+    </mat-card-actions>
+</mat-card>
