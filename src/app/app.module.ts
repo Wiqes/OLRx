@@ -18,6 +18,7 @@ import { ProfileModule } from './main-content/profile/profile.module';
 import { DeliveryModule } from './main-content/delivery/delivery.module';
 import { environment } from '../environments/environment';
 import { metaReducers, reducers } from '../store';
+import { PosterFormModule } from './main-content/poster-form/poster-form.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -44,6 +45,7 @@ import { metaReducers, reducers } from '../store';
         PostersModule,
         ProfileModule,
         DeliveryModule,
+        PosterFormModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],

@@ -23,6 +23,10 @@ export class MenuComponent implements OnInit {
     }
 
     onAddPosterClick(): void {
+        this.router.navigate(['/poster/adding']);
+    }
+
+    onCheckAddingClick(): void {
         this.store$.dispatch(
             new AddPosterAction({
                 title: 'New Poster',
