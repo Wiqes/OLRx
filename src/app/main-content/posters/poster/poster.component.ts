@@ -1,11 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-export interface Poster {
-    title: string;
-    sellerName: string;
-    price: number;
-    description: string;
-}
+import { Poster } from 'src/interfaces/poster.interface';
 
 @Component({
     selector: 'app-poster',
@@ -15,7 +9,7 @@ export interface Poster {
 export class PosterComponent implements OnInit {
     constructor() {}
 
-    @Input() poster: any;
+    @Input() poster: Poster | undefined;
 
     ngOnInit(): void {}
 }
