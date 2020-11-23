@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { PostersState } from '../../../store/reducers/posters.reducer';
-import { AddPosterAction } from '../../../store/actions/posters.actions';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PosterService } from '../../../services/poster.service';
 
 @Component({
     selector: 'app-poster-form',
     templateUrl: './poster-form.component.html',
     styleUrls: ['./poster-form.component.css'],
+    providers: [PosterService],
 })
 export class PosterFormComponent {
     profileForm = this.fb.group({
@@ -21,9 +19,9 @@ export class PosterFormComponent {
 
     constructor(
         private fb: FormBuilder,
-        private store$: Store<PostersState>,
         private route: ActivatedRoute,
         private router: Router,
+        private posterService: PosterService,
     ) {}
 
     get title(): any {
@@ -45,7 +43,7 @@ export class PosterFormComponent {
     onSubmit(): void {
         const { title, sellerName, price, description } = this.profileForm.value;
 
-        this.store$.dispatch(new AddPosterAction({ title, sellerName, price, description }));
+        this.posterService.addPoster({ title, sellerName, price, description });
 
         this.router.navigate(['/posters']);
     }

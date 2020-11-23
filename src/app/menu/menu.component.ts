@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { PostersState } from 'src/store/reducers/posters.reducer';
-import { AddPosterAction } from '../../store/actions/posters.actions';
+import { PosterService } from 'src/services/poster.service';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css'],
+    providers: [PosterService],
 })
 export class MenuComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private store$: Store<PostersState>) {}
+    constructor(private route: ActivatedRoute, private router: Router, private posterService: PosterService) {}
 
     ngOnInit(): void {}
 
@@ -27,13 +26,11 @@ export class MenuComponent implements OnInit {
     }
 
     onCheckAddingClick(): void {
-        this.store$.dispatch(
-            new AddPosterAction({
-                title: 'New Poster',
-                sellerName: 'Sellers Name',
-                price: 220,
-                description: 'Some some some some some some some',
-            }),
-        );
+        this.posterService.addPoster({
+            title: 'New Poster',
+            sellerName: 'Sellers Name',
+            price: 220,
+            description: 'Some some some some some some some',
+        });
     }
 }
