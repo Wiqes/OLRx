@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PosterService } from 'src/services/poster.service';
+import { environment } from '../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-menu',
@@ -9,9 +11,16 @@ import { PosterService } from 'src/services/poster.service';
     providers: [PosterService],
 })
 export class MenuComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private posterService: PosterService) {}
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private posterService: PosterService,
+        private translateService: TranslateService,
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.translateService.use(environment.defaultLocale);
+    }
 
     onProfileClick(): void {
         this.router.navigate(['/profile']);
