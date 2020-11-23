@@ -4,6 +4,9 @@
     </button>
     <span>OLRx</span>
     <span class="spacer"></span>
+  <select (change)="changeLocale()" [(ngModel)]="selectedLanguage">
+    <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
+  </select>
     <button mat-icon-button [matMenuTriggerFor]="menuContainer" aria-label="Icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>

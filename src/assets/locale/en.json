@@ -6,5 +6,11 @@
     "EN": "English",
     "RU": "Russian",
     "TITLE": "Language"
+  },
+  "MENU": {
+    "PROFILE": "My profile",
+    "ADD-POSTER": "Add poster",
+    "CHECK-ADDING": "Check adding",
+    "DELIVERY": "Delivery"
   }
 }

@@ -4,7 +4,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,13 +21,7 @@ import { metaReducers, reducers } from '../store';
 import { PosterFormModule } from './main-content/poster-form/poster-form.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PosterEffects } from '../effects/poster.effects';
-import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { MissingTranslationService } from '../services/missing-translation.service';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
-    return new TranslateHttpLoader(http, './assets/locale/', '.json');
-}
+import { InternationalizationModule } from './internationalization.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -43,15 +37,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
         }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([PosterEffects]),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
-            missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationService },
-            useDefaultLang: false,
-        }),
+        InternationalizationModule,
         BrowserAnimationsModule,
         MaterialModule,
         FormsModule,
