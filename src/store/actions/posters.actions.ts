@@ -3,6 +3,7 @@ import { Poster } from 'src/interfaces/poster.interface';
 
 export enum postersActionsType {
     addPoster = '[POSTERS] add',
+    removePosters = '[POSTERS] remove',
 }
 
 export class AddPosterAction implements Action {
