@@ -11,6 +11,8 @@ import { slideInAnimation } from './animations';
 export class AppComponent {
     title = 'olrxApp';
 
+    constructor() {}
+
     getAnimationData(outlet: RouterOutlet): any {
         return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
     }

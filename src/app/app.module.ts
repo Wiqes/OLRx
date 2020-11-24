@@ -21,6 +21,7 @@ import { metaReducers, reducers } from '../store';
 import { PosterFormModule } from './main-content/poster-form/poster-form.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PosterEffects } from '../effects/poster.effects';
+import { InternationalizationModule } from './internationalization.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { PosterEffects } from '../effects/poster.effects';
         }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([PosterEffects]),
+        InternationalizationModule,
         BrowserAnimationsModule,
         MaterialModule,
         FormsModule,
