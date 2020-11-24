@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Poster, Posters } from 'src/interfaces/poster.interface';
 import { selectPosters } from 'src/store/selectors/posters.selectors';
 import { ActivatedRoute } from '@angular/router';
-import { element } from 'protractor';
+import { PosterService } from 'src/services/poster.service';
 
 @Component({
     selector: 'app-poster-details',
@@ -16,11 +16,19 @@ export class PosterDetailsComponent implements OnInit {
     public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));
     poster?: Poster;
 
-    constructor(private store$: Store<PostersState>, private route: ActivatedRoute) {}
+    constructor(
+        private store$: Store<PostersState>,
+        private route: ActivatedRoute,
+        private posterService: PosterService,
+    ) {}
 
     ngOnInit(): void {
         this.route.params.subscribe(({ id }) => {
             this.posters$.subscribe((posters) => (this.poster = posters.find((item) => item?.id === Number(id))));
         });
+    }
+
+    onFabClicked(): void {
+        this.posterService.toggleToShoppingCart(this.poster?.id);
     }
 }
