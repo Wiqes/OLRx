@@ -1,1 +1,10 @@
-<p>poster-details works!</p>
+<div class="poster-container">
+  <mat-grid-list cols="4" rowHeight="1:2" gutterSize="50">
+    <mat-grid-tile colspan="1" rowspan="1">
+      <app-poster [poster]="poster"></app-poster>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <button mat-raised-button color="primary">Add to shopping cart</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
