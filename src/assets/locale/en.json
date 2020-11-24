@@ -1,19 +1,20 @@
 {
-    "COMMON": {
-        "HEADER": "Ngx Translate Application Usage in Angular"
-    },
-    "LANGUAGES": {
-        "EN": "English",
-        "RU": "Russian",
-        "TITLE": "Language"
-    },
-    "MENU": {
-        "ADD-POSTER": "Add poster",
-        "CHECK-ADDING": "Check adding",
-        "DELIVERY": "Delivery",
-        "PROFILE": "My profile"
-    },
-    "POSTER": {
-        "BUY": "Buy"
-    }
+	"COMMON": {
+		"HEADER": "Ngx Translate Application Usage in Angular"
+	},
+	"LANGUAGES": {
+		"EN": "English",
+		"RU": "Russian",
+		"TITLE": "Language"
+	},
+	"MENU": {
+		"ADD-POSTER": "Add poster",
+		"CHECK-ADDING": "Check adding",
+		"DELIVERY": "Delivery",
+		"PROFILE": "My profile"
+	},
+	"POSTER": {
+		"ADD-TO-CART": "Add to shopping cart",
+		"BUY": "Buy"
+	}
 }

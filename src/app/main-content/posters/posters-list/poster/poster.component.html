@@ -12,6 +12,6 @@
     </mat-card-content>
     <mat-card-actions>
         <button mat-button disabled>{{ poster?.price }} $</button>
-        <button mat-button (click)="onBuyClick(poster?.id)">{{ 'POSTER.BUY' | translate }}</button>
+        <button *ngIf="!details" mat-button (click)="onBuyClick(poster?.id)">{{ 'POSTER.BUY' | translate }}</button>
     </mat-card-actions>
 </mat-card>

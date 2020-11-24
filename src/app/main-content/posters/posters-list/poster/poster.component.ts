@@ -11,6 +11,7 @@ export class PosterComponent implements OnInit {
     constructor(private router: Router) {}
 
     @Input() poster?: Poster;
+    @Input() details?: boolean;
 
     ngOnInit(): void {}
 
