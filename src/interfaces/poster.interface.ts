@@ -1,8 +1,9 @@
-interface PosterObject {
+export interface Poster {
+    id: number;
     title: string;
     sellerName: string;
     price: number;
     description: string;
 }
 
-export type Poster = PosterObject | undefined;
+export type Posters = Array<Poster | undefined>;

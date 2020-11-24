@@ -3,11 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 
-interface Languages {
-    value: string;
-    viewValue: string;
-}
-
 @Component({
     selector: 'app-toolbar',
     templateUrl: './toolbar.component.html',
@@ -18,7 +13,7 @@ export class ToolbarComponent implements OnInit {
 
     @Input() menuContainer: any;
 
-    selectedLanguage: string | undefined;
+    selectedLanguage?: string;
     languages: { id: string; title: string }[] = [];
 
     ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Poster } from 'src/interfaces/poster.interface';
+import { Poster, Posters } from 'src/interfaces/poster.interface';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { SnackbarState } from 'src/store/reducers/snackbar.reducer';
@@ -12,8 +12,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     styleUrls: ['./posters-list.component.css'],
 })
 export class PostersListComponent implements OnInit, OnChanges {
-    @Input() posters: Array<Poster> | undefined | null;
-    @Input() needSnackbar: boolean | undefined | null;
+    @Input() posters?: Posters | null;
+    @Input() needSnackbar?: boolean | null;
 
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -29,7 +29,7 @@ export class PostersListComponent implements OnInit, OnChanges {
             .subscribe((result) => {
                 if (result.matches) {
                     if (result.breakpoints[Breakpoints.TabletLandscape]) {
-                        this.rowHeight = '1:1.5';
+                        this.rowHeight = '1:1.6';
                     }
                     if (result.breakpoints[Breakpoints.WebPortrait]) {
                         this.rowHeight = '1:2';
