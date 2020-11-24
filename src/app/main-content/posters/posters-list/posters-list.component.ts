@@ -29,7 +29,7 @@ export class PostersListComponent implements OnInit, OnChanges {
             .subscribe((result) => {
                 if (result.matches) {
                     if (result.breakpoints[Breakpoints.TabletLandscape]) {
-                        this.rowHeight = '1:1.5';
+                        this.rowHeight = '1:1.6';
                     }
                     if (result.breakpoints[Breakpoints.WebPortrait]) {
                         this.rowHeight = '1:2';
