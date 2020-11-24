@@ -1,9 +1,4 @@
 <app-toolbar [menuContainer]="menu"></app-toolbar>
-<label>{{ 'LANGUAGES.TITLE' | translate }}</label>
-<select (change)="changeLocale()" [(ngModel)]="selectedLanguage">
-  <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
-</select>
-<div>{{ 'COMMON.HEADER' | translate }}</div>
 <mat-menu #menu="matMenu">
     <app-menu></app-menu>
 </mat-menu>
