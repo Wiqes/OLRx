@@ -1,10 +1,13 @@
 <div class="poster-container">
-  <mat-grid-list cols="2" rowHeight="1:1" gutterSize="50">
-    <mat-grid-tile colspan="1" rowspan="1">
-      <app-poster [poster]="poster" [details]="true"></app-poster>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <button mat-raised-button color="primary">{{ 'POSTER.ADD-TO-CART' | translate }}</button>
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="50">
+        <mat-grid-tile colspan="1" rowspan="1">
+            <app-poster [poster]="poster" [details]="true"></app-poster>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+            <app-poster-details-fab
+                (fabClicked)="onFabClicked()"
+                [isInShoppingCart]="poster?.isInShoppingCart"
+            ></app-poster-details-fab>
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>

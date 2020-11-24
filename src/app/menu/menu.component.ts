@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit {
         this.posterService.addPoster({
             id: 222, // the id should be unique and generated on the server-side
             title: 'New Poster',
+            isInShoppingCart: false,
             sellerName: 'Sellers Name',
             price: 220,
             description: 'Some some some some some some some',
