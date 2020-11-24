@@ -1,4 +1,4 @@
-interface PosterObject {
+export interface Poster {
     id: number;
     title: string;
     sellerName: string;
@@ -6,4 +6,4 @@ interface PosterObject {
     description: string;
 }
 
-export type Poster = PosterObject | undefined;
+export type Posters = Array<Poster | undefined>;

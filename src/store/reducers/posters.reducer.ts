@@ -1,10 +1,10 @@
 import { PostersActions, postersActionsType } from '../actions/posters.actions';
-import { Poster } from 'src/interfaces/poster.interface';
+import { Posters } from 'src/interfaces/poster.interface';
 
 export const posters = 'posters';
 
 export interface PostersState {
-    posters: Array<Poster>;
+    posters: Posters;
 }
 
 const initialState: PostersState = {
