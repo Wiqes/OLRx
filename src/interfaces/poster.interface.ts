@@ -1,4 +1,5 @@
 interface PosterObject {
+    id: number;
     title: string;
     sellerName: string;
     price: number;

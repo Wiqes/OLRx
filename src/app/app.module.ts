@@ -22,6 +22,7 @@ import { PosterFormModule } from './main-content/poster-form/poster-form.module'
 import { EffectsModule } from '@ngrx/effects';
 import { PosterEffects } from '../effects/poster.effects';
 import { InternationalizationModule } from './internationalization.module';
+import { PosterViewDetailsModule } from './main-content/poster-details/poster-details.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -51,6 +52,7 @@ import { InternationalizationModule } from './internationalization.module';
         ProfileModule,
         DeliveryModule,
         PosterFormModule,
+        PosterViewDetailsModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Poster } from 'src/interfaces/poster.interface';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-poster',
@@ -7,9 +8,13 @@ import { Poster } from 'src/interfaces/poster.interface';
     styleUrls: ['./poster.component.css'],
 })
 export class PosterComponent implements OnInit {
-    constructor() {}
+    constructor(private router: Router) {}
 
-    @Input() poster: Poster | undefined;
+    @Input() poster?: Poster;
 
     ngOnInit(): void {}
+
+    onBuyClick(id?: number): void {
+        this.router.navigate([`/poster/details/${id}`]);
+    }
 }

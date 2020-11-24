@@ -43,7 +43,8 @@ export class PosterFormComponent {
     onSubmit(): void {
         const { title, sellerName, price, description } = this.profileForm.value;
 
-        this.posterService.addPoster({ title, sellerName, price, description });
+        // the id should be unique and generated on the server-side
+        this.posterService.addPoster({ id: 222, title, sellerName, price, description });
 
         this.router.navigate(['/posters']);
     }

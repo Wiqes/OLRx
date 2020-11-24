@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MenuComponent implements OnInit {
     constructor(
-        private route: ActivatedRoute,
         private router: Router,
         private posterService: PosterService,
         private translateService: TranslateService,
@@ -36,6 +35,7 @@ export class MenuComponent implements OnInit {
 
     onCheckAddingClick(): void {
         this.posterService.addPoster({
+            id: 222, // the id should be unique and generated on the server-side
             title: 'New Poster',
             sellerName: 'Sellers Name',
             price: 220,
