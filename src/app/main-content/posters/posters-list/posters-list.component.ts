@@ -4,6 +4,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Store } from '@ngrx/store';
 import { SnackbarState } from 'src/store/reducers/snackbar.reducer';
 import { DisableSnackBar } from 'src/store/actions/snackbar.actions';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
     selector: 'app-posters-list',
@@ -16,8 +17,29 @@ export class PostersListComponent implements OnInit, OnChanges {
 
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
+    rowHeight = '1:1.2';
 
-    constructor(private snackBar: MatSnackBar, private store$: Store<SnackbarState>) {}
+    constructor(
+        private snackBar: MatSnackBar,
+        private store$: Store<SnackbarState>,
+        breakpointObserver: BreakpointObserver,
+    ) {
+        breakpointObserver
+            .observe([Breakpoints.WebPortrait, Breakpoints.TabletLandscape, Breakpoints.WebLandscape])
+            .subscribe((result) => {
+                if (result.matches) {
+                    if (result.breakpoints[Breakpoints.TabletLandscape]) {
+                        this.rowHeight = '1:1.5';
+                    }
+                    if (result.breakpoints[Breakpoints.WebPortrait]) {
+                        this.rowHeight = '1:2';
+                    }
+                    if (result.breakpoints[Breakpoints.WebLandscape]) {
+                        this.rowHeight = '1:1.2';
+                    }
+                }
+            });
+    }
 
     ngOnInit(): void {}
 
