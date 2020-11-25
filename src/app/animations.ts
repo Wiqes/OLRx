@@ -1,7 +1,14 @@
 import { trigger, animateChild, group, transition, animate, style, query } from '@angular/animations';
 
 const transitionArray: Array<string> = [];
-const animationArray: Array<string> = ['posters', 'profile', 'delivery', 'posterAdding', 'posterDetails'];
+const animationArray: Array<string> = [
+    'posters',
+    'profile',
+    'delivery',
+    'posterAdding',
+    'posterDetails',
+    'shoppingCart',
+];
 animationArray.map((element) => {
     animationArray.map((innerElement) => transitionArray.push(`${element} <=> ${innerElement}`));
 });

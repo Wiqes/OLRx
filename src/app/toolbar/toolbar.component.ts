@@ -40,4 +40,8 @@ export class ToolbarComponent implements OnInit {
     onHomeClick(): void {
         this.router.navigate(['/posters']);
     }
+
+    onShoppingCartClick(): void {
+        this.router.navigate(['/shopping-cart']);
+    }
 }
