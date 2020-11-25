@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PosterService } from 'src/services/poster.service';
 import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-menu',
@@ -11,14 +12,21 @@ import { TranslateService } from '@ngx-translate/core';
     providers: [PosterService],
 })
 export class MenuComponent implements OnInit {
+    isPostersPage?: boolean;
+
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         private posterService: PosterService,
         private translateService: TranslateService,
     ) {}
 
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
+
+        this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe((x) => {
+            this.isPostersPage = x.url === '/posters';
+        });
     }
 
     onProfileClick(): void {

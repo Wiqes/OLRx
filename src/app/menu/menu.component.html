@@ -6,7 +6,7 @@
     <mat-icon color="primary">library_add</mat-icon>
     <span>{{ 'MENU.ADD-POSTER' | translate }}</span>
 </button>
-<button mat-menu-item (click)="onCheckAddingClick()">
+<button mat-menu-item *ngIf="isPostersPage" (click)="onCheckAddingClick()">
     <mat-icon color="primary">library_add</mat-icon>
     <span>{{ 'MENU.CHECK-ADDING' | translate }}</span>
 </button>
