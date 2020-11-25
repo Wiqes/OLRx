@@ -7,24 +7,21 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class RoutingService {
-    path?: string;
+    path?: Observable<string>;
 
     constructor(private router: Router, private route: ActivatedRoute) {
         this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe((x) => {
             this.path = x.url;
         });
+        this.path = this.router.events.pipe(
+            filter((event: any) => event instanceof NavigationEnd),
+            map((event) => event.url.slice(1)),
+        );
     }
 
     navigate(routePath: string, routeParam?: number): void {
         const param = routeParam ? `/${routeParam}` : '';
 
         this.router.navigate([`/${routePath}${param}`]);
-    }
-
-    getPath(): Observable<string> {
-        return this.router.events.pipe(
-            filter((event: any) => event instanceof NavigationEnd),
-            map((event) => event.url.slice(1)),
-        );
     }
 }
