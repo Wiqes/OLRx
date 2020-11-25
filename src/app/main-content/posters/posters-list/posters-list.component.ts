@@ -1,15 +1,16 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Poster, Posters } from 'src/interfaces/poster.interface';
+import { Posters } from 'src/interfaces/poster.interface';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { SnackbarState } from 'src/store/reducers/snackbar.reducer';
 import { DisableSnackBar } from 'src/store/actions/snackbar.actions';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserverService } from 'src/services/breakpoint-observer.service';
 
 @Component({
     selector: 'app-posters-list',
     templateUrl: './posters-list.component.html',
     styleUrls: ['./posters-list.component.css'],
+    providers: [BreakpointObserverService],
 })
 export class PostersListComponent implements OnInit, OnChanges {
     @Input() posters?: Posters | null;
@@ -21,24 +22,21 @@ export class PostersListComponent implements OnInit, OnChanges {
 
     constructor(
         private snackBar: MatSnackBar,
+        private breakpointObserver: BreakpointObserverService,
         private store$: Store<SnackbarState>,
-        breakpointObserver: BreakpointObserver,
     ) {
-        breakpointObserver
-            .observe([Breakpoints.WebPortrait, Breakpoints.TabletLandscape, Breakpoints.WebLandscape])
-            .subscribe((result) => {
-                if (result.matches) {
-                    if (result.breakpoints[Breakpoints.TabletLandscape]) {
-                        this.rowHeight = '1:1.6';
-                    }
-                    if (result.breakpoints[Breakpoints.WebPortrait]) {
-                        this.rowHeight = '1:2';
-                    }
-                    if (result.breakpoints[Breakpoints.WebLandscape]) {
-                        this.rowHeight = '1:1.2';
-                    }
-                }
-            });
+        const { layout$, tabletLandscape, webPortrait, webLandscape } = breakpointObserver;
+        layout$?.subscribe((breakpoints) => {
+            if (breakpoints[tabletLandscape]) {
+                this.rowHeight = '1:1.6';
+            }
+            if (breakpoints[webPortrait]) {
+                this.rowHeight = '1:2';
+            }
+            if (breakpoints[webLandscape]) {
+                this.rowHeight = '1:1.2';
+            }
+        });
     }
 
     ngOnInit(): void {}

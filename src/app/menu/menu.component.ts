@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
 
-        this.routingService.getPath().subscribe((path) => {
+        this.routingService.path?.subscribe((path) => {
             this.isPostersPage = path === RoutesPaths.Posters;
         });
     }
