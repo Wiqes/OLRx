@@ -1,44 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PosterService } from 'src/services/poster.service';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { filter } from 'rxjs/operators';
+import { RoutingService } from 'src/services/routing.service';
+import { RoutesPaths } from 'src/constants/routes-pathes';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css'],
-    providers: [PosterService],
+    providers: [PosterService, RoutingService],
 })
 export class MenuComponent implements OnInit {
     isPostersPage?: boolean;
 
     constructor(
-        private router: Router,
-        private route: ActivatedRoute,
         private posterService: PosterService,
+        private routingService: RoutingService,
         private translateService: TranslateService,
     ) {}
 
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
 
-        this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe((x) => {
-            this.isPostersPage = x.url === '/posters';
+        this.routingService.getPath().subscribe((path) => {
+            this.isPostersPage = path === RoutesPaths.Posters;
         });
     }
 
     onProfileClick(): void {
-        this.router.navigate(['/profile']);
+        this.routingService.navigate(RoutesPaths.Profile);
     }
 
     onDeliveryClick(): void {
-        this.router.navigate(['/delivery']);
+        this.routingService.navigate(RoutesPaths.Delivery);
     }
 
     onAddPosterClick(): void {
-        this.router.navigate(['/poster/adding']);
+        this.routingService.navigate(RoutesPaths.PosterAdding);
     }
 
     onCheckAddingClick(): void {

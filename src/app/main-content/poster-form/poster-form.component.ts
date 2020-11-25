@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PosterService } from '../../../services/poster.service';
+import { PosterService } from 'src/services/poster.service';
+import { RoutingService } from 'src/services/routing.service';
+import { RoutesPaths } from 'src/constants/routes-pathes';
 
 @Component({
     selector: 'app-poster-form',
     templateUrl: './poster-form.component.html',
     styleUrls: ['./poster-form.component.css'],
-    providers: [PosterService],
+    providers: [PosterService, RoutingService],
 })
 export class PosterFormComponent {
     profileForm = this.fb.group({
@@ -19,9 +20,8 @@ export class PosterFormComponent {
 
     constructor(
         private fb: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
         private posterService: PosterService,
+        private routingService: RoutingService,
     ) {}
 
     get title(): any {
@@ -46,6 +46,6 @@ export class PosterFormComponent {
         // the id should be unique and generated on the server-side
         this.posterService.addPoster({ id: 222, title, isInShoppingCart: false, sellerName, price, description });
 
-        this.router.navigate(['/posters']);
+        this.routingService.navigate(RoutesPaths.Posters);
     }
 }

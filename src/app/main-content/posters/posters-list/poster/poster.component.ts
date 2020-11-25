@@ -1,14 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Poster } from 'src/interfaces/poster.interface';
-import { Router } from '@angular/router';
+import { RoutingService } from 'src/services/routing.service';
+import { RoutesPaths } from 'src/constants/routes-pathes';
 
 @Component({
     selector: 'app-poster',
     templateUrl: './poster.component.html',
     styleUrls: ['./poster.component.css'],
+    providers: [RoutingService],
 })
 export class PosterComponent implements OnInit {
-    constructor(private router: Router) {}
+    constructor(private routingService: RoutingService) {}
 
     @Input() poster?: Poster;
     @Input() details?: boolean;
@@ -16,6 +18,6 @@ export class PosterComponent implements OnInit {
     ngOnInit(): void {}
 
     onBuyClick(id?: number): void {
-        this.router.navigate([`/poster/details/${id}`]);
+        this.routingService.navigate(RoutesPaths.PosterDetails, id);
     }
 }

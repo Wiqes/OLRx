@@ -13,6 +13,7 @@ export class PosterService {
     addPoster(poster: Poster): void {
         this.store$.dispatch(new AddPosterAction({ poster }));
     }
+
     toggleToShoppingCart(posterId?: number): void {
         this.store$.dispatch(new ToggleToShoppingCart({ posterId }));
     }
