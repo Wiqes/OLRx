@@ -13,16 +13,12 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material-module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { MenuModule } from './menu/menu.module';
-import { PostersModule } from './main-content/posters/posters.module';
-import { ProfileModule } from './main-content/profile/profile.module';
-import { DeliveryModule } from './main-content/delivery/delivery.module';
 import { environment } from '../environments/environment';
 import { metaReducers, reducers } from '../store';
-import { PosterFormModule } from './main-content/poster-form/poster-form.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PosterEffects } from '../effects/poster.effects';
 import { InternationalizationModule } from './internationalization.module';
-import { PosterViewDetailsModule } from './main-content/poster-details/poster-details.module';
+import { MainContentModule } from './main-content/main-content.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -48,11 +44,7 @@ import { PosterViewDetailsModule } from './main-content/poster-details/poster-de
         ReactiveFormsModule,
         ToolbarModule,
         MenuModule,
-        PostersModule,
-        ProfileModule,
-        DeliveryModule,
-        PosterFormModule,
-        PosterViewDetailsModule,
+        MainContentModule,
     ],
     providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
     bootstrap: [AppComponent],

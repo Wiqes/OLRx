@@ -1,15 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+import { RoutesPaths } from 'src/constants/routes-pathes';
+import { RoutingService } from 'src/services/routing.service';
 
 @Component({
     selector: 'app-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.css'],
+    providers: [RoutingService],
 })
 export class ToolbarComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router, private translateService: TranslateService) {}
+    constructor(private routingService: RoutingService, private translateService: TranslateService) {}
 
     @Input() menuContainer: any;
 
@@ -38,6 +40,10 @@ export class ToolbarComponent implements OnInit {
     }
 
     onHomeClick(): void {
-        this.router.navigate(['/posters']);
+        this.routingService.navigate(RoutesPaths.Posters);
+    }
+
+    onShoppingCartClick(): void {
+        this.routingService.navigate(RoutesPaths.ShoppingCart);
     }
 }

@@ -10,7 +10,7 @@
     <select class="select-language" (change)="changeLocale()" [(ngModel)]="selectedLanguage">
         <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
     </select>
-    <button mat-icon-button aria-label="Icon-button with heart icon">
+    <button mat-icon-button aria-label="Icon-button with heart icon" (click)="onShoppingCartClick()">
         <mat-icon>shopping_cart</mat-icon>
     </button>
 </mat-toolbar>

@@ -1,7 +1,8 @@
 import { trigger, animateChild, group, transition, animate, style, query } from '@angular/animations';
+import { RoutesPaths } from '../constants/routes-pathes';
 
 const transitionArray: Array<string> = [];
-const animationArray: Array<string> = ['posters', 'profile', 'delivery', 'posterAdding', 'posterDetails'];
+const animationArray: Array<string> = Object.values(RoutesPaths);
 animationArray.map((element) => {
     animationArray.map((innerElement) => transitionArray.push(`${element} <=> ${innerElement}`));
 });
