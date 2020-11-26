@@ -25,15 +25,15 @@ export class PostersListComponent implements OnInit, OnChanges {
         private breakpointObserver: BreakpointObserverService,
         private store$: Store<SnackbarState>,
     ) {
-        const { layout$, tabletLandscape, webPortrait, webLandscape } = breakpointObserver;
-        layout$?.subscribe((breakpoints) => {
-            if (breakpoints[tabletLandscape]) {
+        const { breakpoints, tabletLandscape, webPortrait, webLandscape } = breakpointObserver;
+        breakpoints?.subscribe((breakpoint) => {
+            if (breakpoint === tabletLandscape) {
                 this.rowHeight = '1:1.6';
             }
-            if (breakpoints[webPortrait]) {
+            if (breakpoint === webPortrait) {
                 this.rowHeight = '1:2';
             }
-            if (breakpoints[webLandscape]) {
+            if (breakpoint === webLandscape) {
                 this.rowHeight = '1:1.2';
             }
         });
