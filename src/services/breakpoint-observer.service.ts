@@ -10,8 +10,8 @@ import { filter, map, mergeMap } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class BreakpointObserverService {
-    layout$?: Observable<any>;
-    layoutBreakpoints: any = {
+    layout$?: Observable<{ [key: string]: boolean }>;
+    layoutBreakpoints: { [key: string]: string } = {
         tabletLandscape: Breakpoints.TabletLandscape,
         webPortrait: Breakpoints.WebPortrait,
         webLandscape: Breakpoints.WebLandscape,
