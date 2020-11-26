@@ -10,35 +10,42 @@ import { filter, map, mergeMap } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class BreakpointObserverService {
-    breakpoints?: Observable<string>;
-    tabletLandscape = Breakpoints.TabletLandscape;
-    webPortrait = Breakpoints.WebPortrait;
-    webLandscape = Breakpoints.WebLandscape;
+    layout$?: Observable<any>;
+    layoutBreakpoints: any = {
+        tabletLandscape: Breakpoints.TabletLandscape,
+        webPortrait: Breakpoints.WebPortrait,
+        webLandscape: Breakpoints.WebLandscape,
+    };
 
     constructor(
         private snackBar: MatSnackBar,
         private store$: Store<SnackbarState>,
         breakpointObserver: BreakpointObserver,
     ) {
-        const { webPortrait, tabletLandscape, webLandscape } = this;
+        const breakpoints: Array<string> = Object.values(this.layoutBreakpoints);
 
-        this.breakpoints = breakpointObserver.observe([webPortrait, tabletLandscape, webLandscape]).pipe(
+        this.layout$ = breakpointObserver.observe(breakpoints).pipe(
             filter((result) => result.matches),
             map((result) => result.breakpoints),
-            mergeMap((breakpoints) =>
-                Object.keys(breakpoints).filter((breakpoint) => {
-                    if (breakpoint === tabletLandscape && breakpoints[tabletLandscape]) {
-                        return true;
-                    }
-                    if (breakpoint === webPortrait && breakpoints[webPortrait]) {
-                        return true;
-                    }
-                    if (breakpoint === webLandscape && breakpoints[webLandscape]) {
-                        return true;
+            mergeMap((resultBreakpoints) =>
+                Object.keys(resultBreakpoints).filter((breakpoint) => {
+                    for (const value of breakpoints) {
+                        if (breakpoint === value && resultBreakpoints[value]) {
+                            return true;
+                        }
                     }
                     return false;
                 }),
             ),
+            map((breakpoint) => {
+                const responsiveObject: { [key: string]: boolean } = {};
+
+                for (const key of Object.keys(this.layoutBreakpoints)) {
+                    responsiveObject[key] = breakpoint === this.layoutBreakpoints[key];
+                }
+
+                return responsiveObject;
+            }),
         );
     }
 }
