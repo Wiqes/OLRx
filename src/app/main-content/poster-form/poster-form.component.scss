@@ -1,6 +1,5 @@
 .form-container {
     margin-left: 140px;
-    margin-top: 40px;
 }
 
 .mat-form-field {
@@ -9,4 +8,8 @@
 
 button {
     margin-left: 10px;
+}
+
+mat-error {
+  font-size: small;
 }

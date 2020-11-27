@@ -2,6 +2,6 @@
 <mat-menu #menu="matMenu">
     <app-menu></app-menu>
 </mat-menu>
-<div [@routeAnimation]="getAnimationData(routerOutlet)">
+<div [@routeAnimation]="getAnimationData(routerOutlet)" class="mat-app-background main-content">
     <router-outlet #routerOutlet="outlet"></router-outlet>
 </div>

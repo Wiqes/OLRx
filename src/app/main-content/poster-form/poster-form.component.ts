@@ -7,7 +7,7 @@ import { RoutesPaths } from 'src/constants/routes-pathes';
 @Component({
     selector: 'app-poster-form',
     templateUrl: './poster-form.component.html',
-    styleUrls: ['./poster-form.component.css'],
+    styleUrls: ['./poster-form.component.scss'],
     providers: [PosterService, RoutingService],
 })
 export class PosterFormComponent {

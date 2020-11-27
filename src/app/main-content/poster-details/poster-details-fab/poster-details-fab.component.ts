@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
     selector: 'app-poster-details-fab',
     templateUrl: './poster-details-fab.component.html',
-    styleUrls: ['./poster-details-fab.component.css'],
+    styleUrls: ['./poster-details-fab.component.scss'],
 })
 export class PosterDetailsFABComponent implements OnInit, OnChanges {
     @Input() isInShoppingCart?: boolean;
