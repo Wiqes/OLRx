@@ -3,11 +3,11 @@ import { SnackbarActions, snackbarActionsType } from '../actions/snackbar.action
 export const snackbar = 'snackbar';
 
 export interface SnackbarState {
-    needSnackbar: boolean;
+    snackbar?: string;
 }
 
 const initialState: SnackbarState = {
-    needSnackbar: false,
+    snackbar: '',
 };
 
 export const snackbarReducer = (state = initialState, action: SnackbarActions): SnackbarState => {
@@ -15,12 +15,12 @@ export const snackbarReducer = (state = initialState, action: SnackbarActions): 
         case snackbarActionsType.enableSnackBar:
             return {
                 ...state,
-                needSnackbar: true,
+                snackbar: action.payload?.snackbarText,
             };
         case snackbarActionsType.disableSnackBar:
             return {
                 ...state,
-                needSnackbar: false,
+                snackbar: '',
             };
         default:
             return state;

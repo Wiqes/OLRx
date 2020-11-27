@@ -13,7 +13,17 @@ export class PosterEffects {
         return this.actions$.pipe(
             ofType(postersActionsType.addPoster),
             map(() => {
-                return new EnableSnackBarAction();
+                return new EnableSnackBarAction({ snackbarText: 'The poster has been added' });
+            }),
+        );
+    }
+
+    @Effect()
+    movedPoster$(): any {
+        return this.actions$.pipe(
+            ofType(postersActionsType.toggleToShoppingCart),
+            map(() => {
+                return new EnableSnackBarAction({ snackbarText: 'The poster has been moved' });
             }),
         );
     }

@@ -1,4 +1,4 @@
-<app-toolbar [menuContainer]="menu"></app-toolbar>
+<app-toolbar [menuContainer]="menu" [snackbarText]="snackbar | async"></app-toolbar>
 <mat-menu #menu="matMenu">
     <app-menu></app-menu>
 </mat-menu>
