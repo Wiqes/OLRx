@@ -2,8 +2,11 @@
 @include mat-core();
 
 /* ======== angular material custom theme ======== */
-$my-custom-primary: mat-palette($mat-teal);
-$my-custom-accent: mat-palette($mat-yellow, A400);
+/*$my-custom-primary: mat-palette($mat-teal, A200);
+$my-custom-accent: mat-palette($mat-green, A400);
+$my-custom-warn: mat-palette($mat-lime, 50, 400, 700 );*/
+$my-custom-primary: mat-palette($mat-green, A400);
+$my-custom-accent: mat-palette($mat-teal, A200);
 $my-custom-warn: mat-palette($mat-lime, 50, 400, 700 );
 
 // Light theme
