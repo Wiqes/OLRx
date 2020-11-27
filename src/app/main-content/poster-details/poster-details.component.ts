@@ -10,7 +10,7 @@ import { PosterService } from 'src/services/poster.service';
 @Component({
     selector: 'app-poster-details',
     templateUrl: './poster-details.component.html',
-    styleUrls: ['./poster-details.component.css'],
+    styleUrls: ['./poster-details.component.scss'],
 })
 export class PosterDetailsComponent implements OnInit {
     public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));

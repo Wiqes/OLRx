@@ -9,7 +9,7 @@ import { selectSnackbar } from 'src/store/selectors/snackbar.selectors';
 @Component({
     selector: 'app-posters',
     templateUrl: './posters.component.html',
-    styleUrls: ['./posters.component.css'],
+    styleUrls: ['./posters.component.scss'],
 })
 export class PostersComponent implements OnInit {
     public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));

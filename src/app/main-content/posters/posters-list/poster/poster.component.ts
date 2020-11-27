@@ -6,7 +6,7 @@ import { RoutesPaths } from 'src/constants/routes-pathes';
 @Component({
     selector: 'app-poster',
     templateUrl: './poster.component.html',
-    styleUrls: ['./poster.component.css'],
+    styleUrls: ['./poster.component.scss'],
     providers: [RoutingService],
 })
 export class PosterComponent implements OnInit {

@@ -8,7 +8,7 @@ import { RoutesPaths } from 'src/constants/routes-pathes';
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.css'],
+    styleUrls: ['./menu.component.scss'],
     providers: [PosterService, RoutingService],
 })
 export class MenuComponent implements OnInit {

@@ -9,7 +9,7 @@ import { BreakpointObserverService } from 'src/services/breakpoint-observer.serv
 @Component({
     selector: 'app-posters-list',
     templateUrl: './posters-list.component.html',
-    styleUrls: ['./posters-list.component.css'],
+    styleUrls: ['./posters-list.component.scss'],
     providers: [BreakpointObserverService],
 })
 export class PostersListComponent implements OnInit, OnChanges {
