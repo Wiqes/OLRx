@@ -5,8 +5,9 @@ import { RoutesPaths } from 'src/constants/routes-pathes';
 import { RoutingService } from 'src/services/routing.service';
 import { DisableSnackBar } from 'src/store/actions/snackbar.actions';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { PostersState } from 'src/store/reducers/posters.reducer';
+import { selectSnackbar } from 'src/store/selectors/snackbar.selectors';
 
 @Component({
     selector: 'app-toolbar',
@@ -14,16 +15,26 @@ import { PostersState } from 'src/store/reducers/posters.reducer';
     styleUrls: ['./toolbar.component.scss'],
     providers: [RoutingService],
 })
-export class ToolbarComponent implements OnInit, OnChanges {
+export class ToolbarComponent implements OnInit {
     constructor(
         private routingService: RoutingService,
         private translateService: TranslateService,
         private snackBar: MatSnackBar,
         private store$: Store<PostersState>,
-    ) {}
+    ) {
+        this.store$.pipe(select(selectSnackbar)).subscribe((snackbarText) => {
+            if (snackbarText) {
+                this.snackBar.open(snackbarText, 'Close', {
+                    duration: 2000,
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                });
+                setTimeout(() => this.store$.dispatch(new DisableSnackBar()));
+            }
+        });
+    }
 
     @Input() menuContainer: any;
-    @Input() snackbarText?: string | null;
 
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -46,17 +57,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
                     };
                 });
             });
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.snackbarText?.currentValue) {
-            this.snackBar.open(changes.snackbarText?.currentValue, 'Close', {
-                duration: 2000,
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-            });
-            setTimeout(() => this.store$.dispatch(new DisableSnackBar()));
-        }
     }
 
     changeLocale(): void {
