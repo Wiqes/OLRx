@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { select, Store } from '@ngrx/store';
+import { PostersState } from 'src/store/reducers/posters.reducer';
+import { Observable } from 'rxjs';
+import { Posters } from 'src/interfaces/poster.interface';
+import { selectShoppingCartPosters } from 'src/store/selectors/shopping-cart.selectors';
 
 @Component({
     selector: 'app-shopping-cart',
@@ -14,10 +19,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ],
 })
 export class ShoppingCartComponent implements OnInit {
-    constructor() {}
+    constructor(private store$: Store<PostersState>) {}
 
-    dataSource = ELEMENT_DATA;
-    columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+    public dataSource: Observable<Posters> = this.store$.pipe(select(selectShoppingCartPosters));
+    columnsToDisplay = ['id', 'title', 'sellerName', 'price'];
     expandedElement?: PeriodicElement | null;
 
     ngOnInit(): void {}
