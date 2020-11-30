@@ -3,7 +3,8 @@ import { Poster } from 'src/interfaces/poster.interface';
 
 export enum postersActionsType {
     addPoster = '[POSTERS] add',
-    toggleToShoppingCart = '[POSTERS] addToCart',
+    addShoppingCartFlag = '[POSTERS] addFlag',
+    removeShoppingCartFlag = '[POSTERS] removeFlag',
 }
 
 interface Payload {
@@ -17,10 +18,16 @@ export class AddPosterAction implements Action {
     constructor(public payload?: Payload) {}
 }
 
-export class ToggleToShoppingCart implements Action {
-    readonly type: string = postersActionsType.toggleToShoppingCart;
+export class AddShoppingCartFlag implements Action {
+    readonly type: string = postersActionsType.addShoppingCartFlag;
 
     constructor(public payload?: Payload) {}
 }
 
-export type PostersActions = AddPosterAction | ToggleToShoppingCart;
+export class RemoveShoppingCartFlag implements Action {
+    readonly type: string = postersActionsType.removeShoppingCartFlag;
+
+    constructor(public payload?: Payload) {}
+}
+
+export type PostersActions = AddPosterAction | AddShoppingCartFlag;

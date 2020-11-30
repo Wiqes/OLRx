@@ -19,11 +19,21 @@ export class PosterEffects {
     }
 
     @Effect()
-    movedPoster$(): any {
+    addedPosterToCart$(): any {
         return this.actions$.pipe(
-            ofType(postersActionsType.toggleToShoppingCart),
+            ofType(postersActionsType.addShoppingCartFlag),
             map(() => {
-                return new EnableSnackBarAction({ snackbarText: 'The poster has been moved' });
+                return new EnableSnackBarAction({ snackbarText: 'The poster has been added to shopping cart' });
+            }),
+        );
+    }
+
+    @Effect()
+    removedPosterFromCart$(): any {
+        return this.actions$.pipe(
+            ofType(postersActionsType.removeShoppingCartFlag),
+            map(() => {
+                return new EnableSnackBarAction({ snackbarText: 'The poster has been removed from shopping cart' });
             }),
         );
     }
