@@ -11,6 +11,7 @@ import { PosterService } from 'src/services/poster.service';
     selector: 'app-poster-details',
     templateUrl: './poster-details.component.html',
     styleUrls: ['./poster-details.component.scss'],
+    providers: [PosterService],
 })
 export class PosterDetailsComponent implements OnInit {
     public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));
@@ -29,6 +30,10 @@ export class PosterDetailsComponent implements OnInit {
     }
 
     onFabClicked(): void {
-        this.posterService.toggleToShoppingCart(this.poster?.id);
+        if (this.poster?.isInShoppingCart) {
+            this.posterService.removeShoppingCartFlag(this.poster?.id);
+        } else {
+            this.posterService.addShoppingCartFlag(this.poster?.id);
+        }
     }
 }

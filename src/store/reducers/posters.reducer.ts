@@ -144,14 +144,28 @@ export const postersReducer = (state = initialState, action: PostersActions): Po
                 ...state,
                 posters: [action.payload?.poster, ...state.posters],
             };
-        case postersActionsType.toggleToShoppingCart:
+        case postersActionsType.addShoppingCartFlag:
             return {
                 ...state,
                 posters: state.posters.map((poster) => {
                     if (action.payload?.posterId === poster?.id) {
                         return {
                             ...(poster as Poster),
-                            isInShoppingCart: !Boolean(poster?.isInShoppingCart),
+                            isInShoppingCart: true,
+                        };
+                    } else {
+                        return poster;
+                    }
+                }),
+            };
+        case postersActionsType.removeShoppingCartFlag:
+            return {
+                ...state,
+                posters: state.posters.map((poster) => {
+                    if (action.payload?.posterId === poster?.id) {
+                        return {
+                            ...(poster as Poster),
+                            isInShoppingCart: false,
                         };
                     } else {
                         return poster;
