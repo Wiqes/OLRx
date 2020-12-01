@@ -12,6 +12,7 @@ const initialState: PostersState = {
         {
             id: 1,
             title: 'One aaa',
+            photo: 'shiba2.jpg',
             isInShoppingCart: false,
             sellerName: 'Name One',
             price: 1674,
@@ -21,6 +22,7 @@ const initialState: PostersState = {
         {
             id: 2,
             title: 'Two bbb',
+            photo: 'poligon-2560.jpg',
             isInShoppingCart: false,
             sellerName: 'Name One',
             price: 2,
@@ -37,6 +39,7 @@ const initialState: PostersState = {
         {
             id: 4,
             title: 'Four',
+            photo: 'gert.jpg',
             isInShoppingCart: false,
             sellerName: 'Name One',
             price: 1,
@@ -51,10 +54,19 @@ const initialState: PostersState = {
             description:
                 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan',
         },
-        { id: 6, title: 'Two', isInShoppingCart: false, sellerName: 'Name One', price: 2, description: 'lightgreen' },
+        {
+            id: 6,
+            title: 'Two',
+            photo: 'riop.jpg',
+            isInShoppingCart: false,
+            sellerName: 'Name One',
+            price: 2,
+            description: 'lightgreen',
+        },
         {
             id: 7,
             title: 'Three eee',
+            photo: 'jilo.jpeg',
             isInShoppingCart: false,
             sellerName: 'Ccvxc cvxc',
             price: 1345,

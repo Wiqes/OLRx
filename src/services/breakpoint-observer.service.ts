@@ -15,6 +15,12 @@ export class BreakpointObserverService {
         tabletLandscape: Breakpoints.TabletLandscape,
         webPortrait: Breakpoints.WebPortrait,
         webLandscape: Breakpoints.WebLandscape,
+        handset: Breakpoints.Handset,
+        tablet: Breakpoints.Tablet,
+        web: Breakpoints.Web,
+        handsetPortrait: Breakpoints.HandsetPortrait,
+        tabletPortrait: Breakpoints.TabletPortrait,
+        handsetLandscape: Breakpoints.HandsetLandscape,
     };
 
     constructor(

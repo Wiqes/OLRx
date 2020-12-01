@@ -3,3 +3,15 @@
     height: auto;
     width: auto;
 }
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card-image {
+  height: auto;
+  max-height: 200px;
+  width: auto;
+  max-width: 200px;
+}

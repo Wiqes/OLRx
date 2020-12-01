@@ -4,7 +4,7 @@
         <mat-card-title>{{ poster?.title }}</mat-card-title>
         <mat-card-subtitle>{{ poster?.sellerName }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="http://localhost:8080/files/shiba2.jpg" alt="Photo of a Shiba Inu" />
+  <div class="image-container"><img mat-card-image [src]="imageUrl" alt="Photo of a Shiba Inu"/></div>
     <mat-card-content>
         <p>
             {{ poster?.description }}
