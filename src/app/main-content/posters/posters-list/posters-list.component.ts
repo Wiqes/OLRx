@@ -17,7 +17,7 @@ export class PostersListComponent implements OnInit {
         const { layout$ } = breakpointObserver;
         layout$?.subscribe(({ tabletLandscape, webPortrait, webLandscape }) => {
             if (tabletLandscape) {
-                this.rowHeight = '1:1.6';
+                this.rowHeight = '1:2';
             }
             if (webPortrait) {
                 this.rowHeight = '1:2';

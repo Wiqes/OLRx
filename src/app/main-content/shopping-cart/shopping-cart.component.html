@@ -13,7 +13,7 @@
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
       <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
+        <img [src]="getImageUrl(element)" alt="Photo of a Shiba Inu" />
         <div class="element-description">
           {{element.description}}
         </div>

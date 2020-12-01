@@ -5,6 +5,7 @@ import { PostersState } from 'src/store/reducers/posters.reducer';
 import { Poster, Posters } from 'src/interfaces/poster.interface';
 import { selectPosters } from 'src/store/selectors/posters.selectors';
 import { PosterService } from 'src/services/poster.service';
+import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 
 @Component({
     selector: 'app-shopping-cart',
@@ -39,5 +40,12 @@ export class ShoppingCartComponent implements OnInit {
 
     onExpandClick(element: Poster): void {
         this.expandedElement = this.mouseOver || this.expandedElement === element ? null : element;
+    }
+    getImageUrl(element: Poster): string {
+        if (element?.photo) {
+            return `${filesUrl}${element?.photo}`;
+        } else {
+            return noPhotoUrl;
+        }
     }
 }
