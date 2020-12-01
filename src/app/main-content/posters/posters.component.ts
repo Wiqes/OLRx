@@ -11,9 +11,13 @@ import { Posters } from 'src/interfaces/poster.interface';
     styleUrls: ['./posters.component.scss'],
 })
 export class PostersComponent implements OnInit {
-    public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));
+    constructor(private store$: Store<PostersState>) {
+        this.store$
+            .pipe(select(selectPosters))
+            .subscribe((posters) => (this.posters$ = posters.filter((poster) => !poster?.isInShoppingCart)));
+    }
 
-    constructor(private store$: Store<PostersState>) {}
+    public posters$: Posters = [];
 
     ngOnInit(): void {}
 }

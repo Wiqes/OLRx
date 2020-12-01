@@ -10,8 +10,9 @@
             {{ poster?.description }}
         </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions >
         <button mat-button disabled>{{ poster?.price }} $</button>
-        <button *ngIf="!details" mat-button (click)="onBuyClick(poster?.id)">{{ 'POSTER.DETAILS' | translate }}</button>
+        <button color="primary" *ngIf="!details" mat-button (click)="onBuyClick(poster?.id)">{{ 'POSTER.DETAILS' | translate }}</button>
+        <button color="primary" *ngIf="!details" mat-button (click)="onAddToCartClick(poster?.id)">{{ 'POSTER.ADD-TO-CART' | translate }}</button>
     </mat-card-actions>
 </mat-card>
