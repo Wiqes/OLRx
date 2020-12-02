@@ -13,3 +13,10 @@ button {
 mat-error {
   font-size: small;
 }
+
+.photo {
+  height: auto;
+  max-height: 300px;
+  width: auto;
+  max-width: 300px;
+}
