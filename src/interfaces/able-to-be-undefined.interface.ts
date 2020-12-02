@@ -1,1 +1,1 @@
-export type AbleToBeUndefined<T> = T | undefined;
+export type AbleToBeUndefined<T> = T | undefined | null;
