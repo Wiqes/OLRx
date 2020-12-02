@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PosterService } from 'src/services/poster.service';
 import { RoutingService } from 'src/services/routing.service';
@@ -8,8 +8,8 @@ import { UploadFileService } from 'src/services/upload-file.service';
 import { AbleToBeUndefined } from 'src/interfaces/able-to-be-undefined.interface';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, ObservableInput, Subject } from 'rxjs';
-import { finalize, first, mergeMap, takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-poster-form',
@@ -17,7 +17,7 @@ import { finalize, first, mergeMap, takeUntil } from 'rxjs/operators';
     styleUrls: ['./poster-form.component.scss'],
     providers: [PosterService, RoutingService, UploadFileService],
 })
-export class PosterFormComponent implements OnInit {
+export class PosterFormComponent {
     public profileForm = this.fb.group({
         title: ['', Validators.required],
         sellerName: ['', Validators.required],
@@ -28,9 +28,7 @@ export class PosterFormComponent implements OnInit {
     public currentFile: AbleToBeUndefined<File>;
     public progress = 0;
     public message = '';
-    private imageUrlSource = new Subject<string>();
-    public imageUrl$ = this.imageUrlSource.asObservable();
-    public imageUrl = '';
+    public imageUrl = noPhotoUrl;
 
     constructor(
         private fb: FormBuilder,
@@ -38,9 +36,7 @@ export class PosterFormComponent implements OnInit {
         private posterService: PosterService,
         private routingService: RoutingService,
         private uploadService: UploadFileService,
-    ) {
-        this.imageUrl$.subscribe((value) => console.log(value));
-    }
+    ) {}
 
     get title(): any {
         return this.profileForm.get('title');
@@ -56,10 +52,6 @@ export class PosterFormComponent implements OnInit {
 
     get description(): any {
         return this.profileForm.get('description');
-    }
-
-    ngOnInit(): void {
-        this.imageUrlSource.next(noPhotoUrl);
     }
 
     onSubmit(): void {
@@ -89,7 +81,7 @@ export class PosterFormComponent implements OnInit {
                     const target = event.target as HTMLInputElement;
                     this.selectedFiles = target?.files;
                     this.currentFile = this.selectedFiles?.item(0);
-                    this.imageUrl = `${filesUrl}${this.currentFile?.name}`;
+                    const imgUrl = `${filesUrl}${this.currentFile?.name}`;
                     this.uploadService.upload(this.currentFile).subscribe(
                         (httpEvent) => {
                             if (httpEvent.type === HttpEventType.UploadProgress) {
@@ -97,7 +89,7 @@ export class PosterFormComponent implements OnInit {
                                 this.progress = Math.round((100 * httpEvent.loaded) / divider);
                             } else if (httpEvent instanceof HttpResponse) {
                                 this.message = httpEvent.body?.message;
-                                this.imageUrlSource.next(this.imageUrl);
+                                this.imageUrl = imgUrl;
                             }
                         },
                         (err) => {
