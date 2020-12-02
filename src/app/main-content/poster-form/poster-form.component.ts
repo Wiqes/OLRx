@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PosterService } from 'src/services/poster.service';
 import { RoutingService } from 'src/services/routing.service';
@@ -7,6 +7,9 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService } from 'src/services/upload-file.service';
 import { AbleToBeUndefined } from 'src/interfaces/able-to-be-undefined.interface';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
+import { DOCUMENT } from '@angular/common';
+import { fromEvent, ObservableInput, Subject } from 'rxjs';
+import { finalize, first, mergeMap, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-poster-form',
@@ -14,49 +17,29 @@ import { filesUrl, noPhotoUrl } from 'src/constants/urls';
     styleUrls: ['./poster-form.component.scss'],
     providers: [PosterService, RoutingService, UploadFileService],
 })
-export class PosterFormComponent {
-    profileForm = this.fb.group({
+export class PosterFormComponent implements OnInit {
+    public profileForm = this.fb.group({
         title: ['', Validators.required],
         sellerName: ['', Validators.required],
         price: ['', [Validators.required, Validators.pattern('\\d+')]],
         description: [''],
     });
-
     public selectedFiles: AbleToBeUndefined<FileList>;
     public currentFile: AbleToBeUndefined<File>;
     public progress = 0;
     public message = '';
-    public imageUrl = noPhotoUrl;
+    private imageUrlSource = new Subject<string>();
+    public imageUrl$ = this.imageUrlSource.asObservable();
+    public imageUrl = '';
 
     constructor(
         private fb: FormBuilder,
+        @Inject(DOCUMENT) private document: Document,
         private posterService: PosterService,
         private routingService: RoutingService,
         private uploadService: UploadFileService,
-    ) {}
-
-    selectFile(event: any): void {
-        this.selectedFiles = event.target.files;
-
-        this.currentFile = this.selectedFiles?.item(0);
-        this.imageUrl = `${filesUrl}${this.currentFile?.name}`;
-        this.uploadService.upload(this.currentFile).subscribe(
-            (httpEvent) => {
-                if (httpEvent.type === HttpEventType.UploadProgress) {
-                    const divider = httpEvent.total || 1;
-                    this.progress = Math.round((100 * httpEvent.loaded) / divider);
-                } else if (httpEvent instanceof HttpResponse) {
-                    this.message = event.body?.message;
-                }
-            },
-            (err) => {
-                this.progress = 0;
-                this.message = 'Could not upload the file!';
-                this.currentFile = undefined;
-            },
-        );
-
-        this.selectedFiles = undefined;
+    ) {
+        this.imageUrl$.subscribe((value) => console.log(value));
     }
 
     get title(): any {
@@ -75,6 +58,10 @@ export class PosterFormComponent {
         return this.profileForm.get('description');
     }
 
+    ngOnInit(): void {
+        this.imageUrlSource.next(noPhotoUrl);
+    }
+
     onSubmit(): void {
         const { title, sellerName, price, description } = this.profileForm.value;
 
@@ -90,5 +77,41 @@ export class PosterFormComponent {
         });
 
         this.routingService.navigate(RoutesPaths.Posters);
+    }
+
+    onEditClick(): void {
+        const fileInput = this.document.createElement('input');
+        fileInput.type = 'file';
+        fromEvent(fileInput, 'change')
+            .pipe(first())
+            .subscribe(
+                (event) => {
+                    const target = event.target as HTMLInputElement;
+                    this.selectedFiles = target?.files;
+                    this.currentFile = this.selectedFiles?.item(0);
+                    this.imageUrl = `${filesUrl}${this.currentFile?.name}`;
+                    this.uploadService.upload(this.currentFile).subscribe(
+                        (httpEvent) => {
+                            if (httpEvent.type === HttpEventType.UploadProgress) {
+                                const divider = httpEvent.total || 1;
+                                this.progress = Math.round((100 * httpEvent.loaded) / divider);
+                            } else if (httpEvent instanceof HttpResponse) {
+                                this.message = httpEvent.body?.message;
+                                this.imageUrlSource.next(this.imageUrl);
+                            }
+                        },
+                        (err) => {
+                            this.progress = 0;
+                            this.message = 'Could not upload the file!';
+                            this.currentFile = undefined;
+                        },
+                    );
+
+                    this.selectedFiles = undefined;
+                },
+                () => console.log('Upload error'),
+                () => console.log('Upload completed'),
+            );
+        fileInput.click();
     }
 }

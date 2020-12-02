@@ -20,3 +20,15 @@ mat-error {
   width: auto;
   max-width: 300px;
 }
+
+.edit-icon {
+  position: relative;
+  right: 52px;
+  top: 2px;
+  z-index: 1;
+  align-self: flex-start;
+}
+
+.photo-container {
+  display: flex;
+}
