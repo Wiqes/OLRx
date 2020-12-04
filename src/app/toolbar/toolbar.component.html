@@ -1,5 +1,10 @@
 <mat-toolbar color="primary" [class.mat-elevation-z9]="true">
-    <button [class.mat-elevation-z3]="true" mat-icon-button (click)="onHomeClick()" aria-label="Icon-button with menu icon">
+    <button
+        [class.mat-elevation-z3]="true"
+        mat-icon-button
+        (click)="onHomeClick()"
+        aria-label="Icon-button with menu icon"
+    >
         <mat-icon>home</mat-icon>
     </button>
     <span class="logo">OLRx</span>
@@ -7,7 +12,12 @@
     <button mat-icon-button [matMenuTriggerFor]="menuContainer" aria-label="Icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
-    <select [class.mat-elevation-z1]="true" class="select-language" (change)="changeLocale()" [(ngModel)]="selectedLanguage">
+    <select
+        [class.mat-elevation-z1]="true"
+        class="select-language"
+        (change)="changeLocale()"
+        [(ngModel)]="selectedLanguage"
+    >
         <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
     </select>
     <button mat-icon-button aria-label="Icon-button with heart icon" (click)="onShoppingCartClick()">

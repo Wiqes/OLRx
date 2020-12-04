@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PosterService } from 'src/services/poster.service';
 import { RoutingService } from 'src/services/routing.service';
@@ -8,7 +8,7 @@ import { UploadFileService } from 'src/services/upload-file.service';
 import { AbleToBeUndefined } from 'src/interfaces/able-to-be-undefined.interface';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -29,6 +29,7 @@ export class PosterFormComponent {
     public progress = 0;
     public message = '';
     public imageUrl = noPhotoUrl;
+    private imageName = '';
 
     constructor(
         private fb: FormBuilder,
@@ -61,7 +62,7 @@ export class PosterFormComponent {
         this.posterService.addPoster({
             id: 222,
             title,
-            photo: this.currentFile?.name,
+            photo: this.imageName,
             isInShoppingCart: false,
             sellerName,
             price,
@@ -81,15 +82,14 @@ export class PosterFormComponent {
                     const target = event.target as HTMLInputElement;
                     this.selectedFiles = target?.files;
                     this.currentFile = this.selectedFiles?.item(0);
-                    const imgUrl = `${filesUrl}${this.currentFile?.name}`;
                     this.uploadService.upload(this.currentFile).subscribe(
                         (httpEvent) => {
                             if (httpEvent.type === HttpEventType.UploadProgress) {
                                 const divider = httpEvent.total || 1;
                                 this.progress = Math.round((100 * httpEvent.loaded) / divider);
                             } else if (httpEvent instanceof HttpResponse) {
-                                this.message = httpEvent.body?.message;
-                                this.imageUrl = imgUrl;
+                                this.imageUrl = `${filesUrl}${httpEvent.body?.fileName}`;
+                                this.imageName = httpEvent.body?.fileName;
                             }
                         },
                         (err) => {

@@ -1,7 +1,15 @@
 <div class="form-container">
-  <div class="photo-container"><img class="photo" [src]="imageUrl" alt="Photo"/><button  class="edit-icon" mat-mini-fab color="primary" (click)="onEditClick()" aria-label="Icon-button with edit icon">
-    <mat-icon>edit</mat-icon>
-  </button></div>
+    <div class="photo-container">
+        <img class="photo" [src]="imageUrl" alt="Photo" /><button
+            class="edit-icon"
+            mat-mini-fab
+            color="primary"
+            (click)="onEditClick()"
+            aria-label="Icon-button with edit icon"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div>
             <mat-form-field appearance="outline">
