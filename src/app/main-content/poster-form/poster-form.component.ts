@@ -60,7 +60,7 @@ export class PosterFormComponent {
 
         // the id should be unique and generated on the server-side
         this.posterService.addPoster({
-            id: 222,
+            id: '222',
             title,
             photo: this.imageName,
             isInShoppingCart: false,

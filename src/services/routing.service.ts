@@ -19,7 +19,7 @@ export class RoutingService {
         );
     }
 
-    navigate(routePath: string, routeParam?: number): void {
+    navigate(routePath: string, routeParam?: string): void {
         const param = routeParam ? `/${routeParam}` : '';
 
         this.router.navigate([`/${routePath}${param}`]);

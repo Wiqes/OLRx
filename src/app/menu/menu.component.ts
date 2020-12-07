@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
 
     onCheckAddingClick(): void {
         this.posterService.addPoster({
-            id: 222, // the id should be unique and generated on the server-side
+            id: '222', // the id should be unique and generated on the server-side
             title: 'New Poster',
             isInShoppingCart: false,
             sellerName: 'Sellers Name',
