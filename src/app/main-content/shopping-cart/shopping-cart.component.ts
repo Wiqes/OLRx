@@ -34,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    onRemoveClick(posterId: number): void {
+    onRemoveClick(posterId: string): void {
         this.posterService.removeShoppingCartFlag(posterId);
     }
 

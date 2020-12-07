@@ -30,11 +30,11 @@ export class PosterComponent implements OnInit, OnChanges {
         }
     }
 
-    onBuyClick(id?: number): void {
+    onBuyClick(id?: string): void {
         this.routingService.navigate(RoutesPaths.PosterDetails, id);
     }
 
-    onAddToCartClick(id?: number): void {
+    onAddToCartClick(id?: string): void {
         this.posterService.addShoppingCartFlag(id);
     }
 }

@@ -25,7 +25,7 @@ export class PosterDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.subscribe(({ id }) => {
-            this.posters$.subscribe((posters) => (this.poster = posters.find((item) => item?.id === Number(id))));
+            this.posters$.subscribe((posters) => (this.poster = posters.find((item) => item?.id === id)));
         });
     }
 

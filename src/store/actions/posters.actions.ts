@@ -1,15 +1,17 @@
 import { Action } from '@ngrx/store';
-import { Poster } from 'src/interfaces/poster.interface';
+import { Poster, Posters } from 'src/interfaces/poster.interface';
 
 export enum postersActionsType {
     addPoster = '[POSTERS] add',
     addShoppingCartFlag = '[POSTERS] addFlag',
     removeShoppingCartFlag = '[POSTERS] removeFlag',
+    getPosters = '[POSTERS] getPosters',
 }
 
 interface Payload {
-    posterId?: number;
+    posterId?: string;
     poster?: Poster;
+    posters?: Posters;
 }
 
 export class AddPosterAction implements Action {
@@ -30,4 +32,10 @@ export class RemoveShoppingCartFlag implements Action {
     constructor(public payload?: Payload) {}
 }
 
-export type PostersActions = AddPosterAction | AddShoppingCartFlag;
+export class GetPosters implements Action {
+    readonly type: string = postersActionsType.getPosters;
+
+    constructor(public payload?: Payload) {}
+}
+
+export type PostersActions = AddPosterAction | AddShoppingCartFlag | RemoveShoppingCartFlag | GetPosters;
