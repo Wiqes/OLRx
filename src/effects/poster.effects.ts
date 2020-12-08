@@ -17,6 +17,15 @@ export class PosterEffects {
             }),
         );
     }
+    @Effect()
+    removedPoster$(): any {
+        return this.actions$.pipe(
+            ofType(postersActionsType.removePoster),
+            map(() => {
+                return new EnableSnackBarAction({ snackbarText: 'The poster has been removed' });
+            }),
+        );
+    }
 
     @Effect()
     addedPosterToCart$(): any {

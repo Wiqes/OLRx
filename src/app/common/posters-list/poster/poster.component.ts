@@ -16,6 +16,7 @@ export class PosterComponent implements OnInit, OnChanges {
 
     @Input() poster?: Poster;
     @Input() details?: boolean;
+    @Input() list?: boolean;
 
     public imageUrl = filesUrl;
 
@@ -36,5 +37,9 @@ export class PosterComponent implements OnInit, OnChanges {
 
     onAddToCartClick(id?: string): void {
         this.posterService.addShoppingCartFlag(id);
+    }
+
+    onRemovePosterClick(id?: string): void {
+        this.posterService.removePoster(id);
     }
 }

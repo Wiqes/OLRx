@@ -18,6 +18,11 @@ export const postersReducer = (state = initialState, action: PostersActions): Po
                 ...state,
                 posters: [action.payload?.poster, ...state.posters],
             };
+        case postersActionsType.removePoster:
+            return {
+                ...state,
+                posters: state.posters.filter((poster) => poster?.id !== action.payload?.posterId),
+            };
         case postersActionsType.addShoppingCartFlag:
             return {
                 ...state,

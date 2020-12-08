@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Posters } from 'src/interfaces/poster.interface';
 import { BreakpointObserverService } from 'src/services/breakpoint-observer.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-posters-list',
@@ -11,9 +12,10 @@ import { BreakpointObserverService } from 'src/services/breakpoint-observer.serv
 export class PostersListComponent implements OnInit {
     @Input() posters?: Posters | null;
 
-    rowHeight = '1:1.2';
+    public list?: boolean;
+    public rowHeight = '1:1.2';
 
-    constructor(private breakpointObserver: BreakpointObserverService) {
+    constructor(private breakpointObserver: BreakpointObserverService, private route: ActivatedRoute) {
         const { layout$ } = breakpointObserver;
         layout$?.subscribe(({ tabletLandscape, webPortrait, webLandscape }) => {
             if (tabletLandscape) {
@@ -28,5 +30,9 @@ export class PostersListComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.route.url.subscribe((urlSegment) => {
+            this.list = urlSegment[0].path === 'posters';
+        });
+    }
 }

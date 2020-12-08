@@ -16,6 +16,7 @@
     },
     "POSTER": {
         "ADD-TO-CART": "Add to shopping cart",
+        "REMOVE-POSTER": "Remove",
         "REMOVE-FROM-CART": "Remove from shopping cart",
         "DETAILS": "Details"
     }

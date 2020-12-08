@@ -16,6 +16,7 @@
     },
     "POSTER": {
         "ADD-TO-CART": "Добавить в корзину",
+        "REMOVE-POSTER": "Удалить",
         "REMOVE-FROM-CART": "Убрать из корзины",
         "DETAILS": "Описание"
     }

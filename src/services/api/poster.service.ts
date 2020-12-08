@@ -7,6 +7,7 @@ import {
     AddPosterAction,
     AddShoppingCartFlag,
     GetPosters,
+    RemovePosterAction,
     RemoveShoppingCartFlag,
 } from 'src/store/actions/posters.actions';
 
@@ -21,6 +22,10 @@ export class PosterService {
     addPoster(poster: Poster): void {
         this.store$.dispatch(new AddPosterAction({ poster }));
         this.http.post(this.postersUrl, poster).subscribe((response) => response);
+    }
+    removePoster(posterId?: string): void {
+        this.store$.dispatch(new RemovePosterAction({ posterId }));
+        this.http.delete(`${this.postersUrl}/${posterId}`).subscribe((response) => response);
     }
 
     addShoppingCartFlag(posterId?: string): void {
