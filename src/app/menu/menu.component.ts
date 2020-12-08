@@ -40,6 +40,10 @@ export class MenuComponent implements OnInit {
         this.routingService.navigate(RoutesPaths.PosterAdding);
     }
 
+    onBuyPostersClick(): void {
+        this.routingService.navigate(RoutesPaths.BuyPosters);
+    }
+
     onCheckAddingClick(): void {
         this.posterService.addPoster({
             id: '222', // the id should be unique and generated on the server-side

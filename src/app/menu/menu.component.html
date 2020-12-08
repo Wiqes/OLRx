@@ -2,6 +2,10 @@
     <mat-icon color="primary">perm_identity</mat-icon>
     <span>{{ 'MENU.PROFILE' | translate }}</span>
 </button>
+<button mat-menu-item (click)="onBuyPostersClick()">
+    <mat-icon color="primary">add_shopping_cart</mat-icon>
+    <span>{{ 'MENU.BUY-POSTERS' | translate }}</span>
+</button>
 <button mat-menu-item (click)="onAddPosterClick()">
     <mat-icon color="primary">library_add</mat-icon>
     <span>{{ 'MENU.ADD-POSTER' | translate }}</span>

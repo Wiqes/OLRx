@@ -13,9 +13,7 @@ import { PosterService } from 'src/services/api/poster.service';
 })
 export class PostersComponent implements OnInit {
     constructor(private store$: Store<PostersState>, private posterService: PosterService) {
-        this.store$
-            .pipe(select(selectPosters))
-            .subscribe((posters) => (this.posters$ = posters.filter((poster) => !poster?.isInShoppingCart)));
+        this.store$.pipe(select(selectPosters)).subscribe((posters) => (this.posters$ = posters));
     }
 
     public posters$: Posters = [];
