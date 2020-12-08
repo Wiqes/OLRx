@@ -41,6 +41,7 @@ export class ShoppingCartComponent implements OnInit {
 
     onRemoveClick(posterId: string): void {
         this.posterService.removeShoppingCartFlag(posterId);
+        this.shoppingCartService.removePoster(posterId);
     }
 
     onExpandClick(element: Poster): void {

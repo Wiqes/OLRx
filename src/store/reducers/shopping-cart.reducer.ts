@@ -21,6 +21,11 @@ export const shoppingCartPostersReducer = (
                 ...state,
                 posters: action.payload?.posters ? [...action.payload?.posters] : [],
             };
+        case shoppingCartActionsType.removePoster:
+            return {
+                ...state,
+                posters: state.posters.filter((poster) => poster?.id !== action.payload?.posterId),
+            };
         default:
             return state;
     }
