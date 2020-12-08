@@ -7,10 +7,12 @@ import { PosterFormComponent } from './main-content/poster-form/poster-form.comp
 import { PosterDetailsComponent } from './main-content/poster-details/poster-details.component';
 import { ShoppingCartComponent } from './main-content/shopping-cart/shopping-cart.component';
 import { RoutesPaths } from '../constants/routes-pathes';
+import { BuyPostersComponent } from './main-content/buy-posters/buy-posters.component';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${RoutesPaths.Posters}`, pathMatch: 'full' },
     { path: RoutesPaths.Posters, component: PostersComponent, data: { animation: RoutesPaths.Posters } },
+    { path: RoutesPaths.BuyPosters, component: BuyPostersComponent, data: { animation: RoutesPaths.BuyPosters } },
     { path: RoutesPaths.Profile, component: ProfileComponent, data: { animation: RoutesPaths.Profile } },
     { path: RoutesPaths.Delivery, component: DeliveryComponent, data: { animation: RoutesPaths.Delivery } },
     { path: RoutesPaths.PosterAdding, component: PosterFormComponent, data: { animation: RoutesPaths.PosterAdding } },

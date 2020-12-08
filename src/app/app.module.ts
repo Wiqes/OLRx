@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -22,6 +22,7 @@ import { MainContentModule } from './main-content/main-content.module';
 
 @NgModule({
     declarations: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         BrowserModule,
         AppRoutingModule,
