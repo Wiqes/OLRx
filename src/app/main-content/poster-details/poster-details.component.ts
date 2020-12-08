@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Poster, Posters } from 'src/interfaces/poster.interface';
 import { selectPosters } from 'src/store/selectors/posters.selectors';
 import { ActivatedRoute } from '@angular/router';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 
 @Component({
     selector: 'app-poster-details',

@@ -3,9 +3,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { select, Store } from '@ngrx/store';
 import { PostersState } from 'src/store/reducers/posters.reducer';
 import { Poster, Posters } from 'src/interfaces/poster.interface';
-import { selectPosters } from 'src/store/selectors/posters.selectors';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
+import { selectShoppingCartPosters } from 'src/store/selectors/shopping-cart.selectors';
+import { ShoppingCartService } from 'src/services/api/shopping-cart.service';
 
 @Component({
     selector: 'app-shopping-cart',
@@ -21,10 +22,12 @@ import { filesUrl, noPhotoUrl } from 'src/constants/urls';
     ],
 })
 export class ShoppingCartComponent implements OnInit {
-    constructor(private store$: Store<PostersState>, private posterService: PosterService) {
-        this.store$
-            .pipe(select(selectPosters))
-            .subscribe((posters) => (this.dataSource = posters.filter((poster) => poster?.isInShoppingCart)));
+    constructor(
+        private store$: Store<PostersState>,
+        private posterService: PosterService,
+        private shoppingCartService: ShoppingCartService,
+    ) {
+        this.store$.pipe(select(selectShoppingCartPosters)).subscribe((posters) => (this.dataSource = posters));
     }
 
     public dataSource: Posters = [];
@@ -32,7 +35,9 @@ export class ShoppingCartComponent implements OnInit {
     public expandedElement?: Poster | null;
     public mouseOver = false;
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.shoppingCartService.getPosters();
+    }
 
     onRemoveClick(posterId: string): void {
         this.posterService.removeShoppingCartFlag(posterId);

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { PostersState } from 'src/store/reducers/posters.reducer';
 import { selectPosters } from 'src/store/selectors/posters.selectors';
 import { Posters } from 'src/interfaces/poster.interface';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 
 @Component({
     selector: 'app-posters',

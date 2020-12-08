@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutingService } from 'src/services/routing.service';
