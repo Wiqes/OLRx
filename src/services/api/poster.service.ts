@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Poster } from 'src/interfaces/poster.interface';
 import { PostersState } from 'src/store/reducers/posters.reducer';
 import {
@@ -10,12 +10,18 @@ import {
     RemovePosterAction,
     RemoveShoppingCartFlag,
 } from 'src/store/actions/posters.actions';
+import { selectPoster } from 'src/store/selectors/posters.selectors';
+import { UploadFileService } from '../upload-file.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PosterService {
-    constructor(private store$: Store<PostersState>, private http: HttpClient) {}
+    constructor(
+        private store$: Store<PostersState>,
+        private http: HttpClient,
+        private uploadFileService: UploadFileService,
+    ) {}
 
     private postersUrl = 'http://localhost:3000/posters';
 
@@ -24,8 +30,14 @@ export class PosterService {
         this.http.post(this.postersUrl, poster).subscribe((response) => response);
     }
     removePoster(posterId?: string): void {
-        this.store$.dispatch(new RemovePosterAction({ posterId }));
         this.http.delete(`${this.postersUrl}/${posterId}`).subscribe((response) => response);
+        this.store$
+            .pipe(select(selectPoster(posterId)))
+            .subscribe((poster) =>
+                this.uploadFileService
+                    .removeFile(poster?.photo)
+                    .subscribe(() => this.store$.dispatch(new RemovePosterAction({ posterId }))),
+            );
     }
 
     addShoppingCartFlag(posterId?: string): void {
