@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostersComponent } from './posters.component';
+import { BuyPostersComponent } from './buy-posters.component';
 import { MaterialModule } from 'src/app/material-module';
 import { PostersListModule } from 'src/app/common/posters-list/posters-list.module';
 
 @NgModule({
-    declarations: [PostersComponent],
+    declarations: [BuyPostersComponent],
     imports: [CommonModule, MaterialModule, PostersListModule],
-    exports: [PostersComponent],
+    exports: [BuyPostersComponent],
 })
-export class PostersModule {}
+export class BuyPostersModule {}

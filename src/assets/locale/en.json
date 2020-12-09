@@ -9,12 +9,14 @@
     },
     "MENU": {
         "ADD-POSTER": "Add poster",
+        "BUY-POSTERS": "Buy posters",
         "CHECK-ADDING": "Check adding",
         "DELIVERY": "Delivery",
         "PROFILE": "My profile"
     },
     "POSTER": {
         "ADD-TO-CART": "Add to shopping cart",
+        "REMOVE-POSTER": "Remove",
         "REMOVE-FROM-CART": "Remove from shopping cart",
         "DETAILS": "Details"
     }

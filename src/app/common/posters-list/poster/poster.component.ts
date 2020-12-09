@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Poster } from 'src/interfaces/poster.interface';
 import { RoutingService } from 'src/services/routing.service';
 import { RoutesPaths } from 'src/constants/routes-pathes';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 
 @Component({
@@ -16,6 +16,7 @@ export class PosterComponent implements OnInit, OnChanges {
 
     @Input() poster?: Poster;
     @Input() details?: boolean;
+    @Input() list?: boolean;
 
     public imageUrl = filesUrl;
 
@@ -36,5 +37,9 @@ export class PosterComponent implements OnInit, OnChanges {
 
     onAddToCartClick(id?: string): void {
         this.posterService.addShoppingCartFlag(id);
+    }
+
+    onRemovePosterClick(id?: string): void {
+        this.posterService.removePoster(id);
     }
 }

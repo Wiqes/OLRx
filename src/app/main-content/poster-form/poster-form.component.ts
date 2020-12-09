@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PosterService } from 'src/services/poster.service';
+import { PosterService } from 'src/services/api/poster.service';
 import { RoutingService } from 'src/services/routing.service';
 import { RoutesPaths } from 'src/constants/routes-pathes';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -94,7 +94,7 @@ export class PosterFormComponent {
                         },
                         (err) => {
                             this.progress = 0;
-                            this.message = 'Could not upload the file!';
+                            this.message = `Could not upload the file! ${err}`;
                             this.currentFile = undefined;
                         },
                     );

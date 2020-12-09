@@ -9,12 +9,14 @@
     },
     "MENU": {
         "ADD-POSTER": "Добавить обьявление",
+        "BUY-POSTERS": "Купить с афиши",
         "CHECK-ADDING": "Проверить добавление",
         "DELIVERY": "Доставка",
         "PROFILE": "Мой профиль"
     },
     "POSTER": {
         "ADD-TO-CART": "Добавить в корзину",
+        "REMOVE-POSTER": "Удалить",
         "REMOVE-FROM-CART": "Убрать из корзины",
         "DETAILS": "Описание"
     }

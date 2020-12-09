@@ -6,6 +6,7 @@ import { DeliveryModule } from './delivery/delivery.module';
 import { PosterFormModule } from './poster-form/poster-form.module';
 import { PosterViewDetailsModule } from './poster-details/poster-details.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { BuyPostersModule } from './buy-posters/buy-posters.module';
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
         PosterFormModule,
         PosterViewDetailsModule,
         ShoppingCartModule,
+        BuyPostersModule,
     ],
 })
 export class MainContentModule {}

@@ -1,7 +1,7 @@
 <div class="main-content">
     <mat-grid-list cols="4" [rowHeight]="rowHeight" gutterSize="50">
         <mat-grid-tile *ngFor="let poster of posters" colspan="1" rowspan="1">
-            <app-poster [poster]="poster"></app-poster>
+            <app-poster [poster]="poster" [list]="list"></app-poster>
         </mat-grid-tile>
     </mat-grid-list>
 </div>

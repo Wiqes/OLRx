@@ -15,8 +15,11 @@
         <button color="primary" *ngIf="!details" mat-button (click)="onBuyClick(poster?.id)">
             {{ 'POSTER.DETAILS' | translate }}
         </button>
-        <button color="primary" *ngIf="!details" mat-button (click)="onAddToCartClick(poster?.id)">
+        <button color="primary" *ngIf="!details && !list" mat-button (click)="onAddToCartClick(poster?.id)">
             {{ 'POSTER.ADD-TO-CART' | translate }}
+        </button>
+        <button color="primary" *ngIf="list" mat-button (click)="onRemovePosterClick(poster?.id)">
+            {{ 'POSTER.REMOVE-POSTER' | translate }}
         </button>
     </mat-card-actions>
 </mat-card>
