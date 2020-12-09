@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material-module';
@@ -19,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { PosterEffects } from '../effects/poster.effects';
 import { InternationalizationModule } from './internationalization.module';
 import { MainContentModule } from './main-content/main-content.module';
+import { httpInterceptorProviders } from '../http-interceptors';
 
 @NgModule({
     declarations: [AppComponent],
@@ -47,7 +47,10 @@ import { MainContentModule } from './main-content/main-content.module';
         MenuModule,
         MainContentModule,
     ],
-    providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }],
+    providers: [
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+        httpInterceptorProviders,
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
