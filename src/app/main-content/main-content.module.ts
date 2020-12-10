@@ -7,6 +7,7 @@ import { PosterFormModule } from './poster-form/poster-form.module';
 import { PosterViewDetailsModule } from './poster-details/poster-details.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { BuyPostersModule } from './buy-posters/buy-posters.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
     declarations: [],
@@ -19,6 +20,7 @@ import { BuyPostersModule } from './buy-posters/buy-posters.module';
         PosterViewDetailsModule,
         ShoppingCartModule,
         BuyPostersModule,
+        LoginModule,
     ],
 })
 export class MainContentModule {}

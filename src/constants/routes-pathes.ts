@@ -1,4 +1,5 @@
 export enum RoutesPaths {
+    Login = 'login',
     Posters = 'posters',
     BuyPosters = 'buy-posters',
     Profile = 'profile',
