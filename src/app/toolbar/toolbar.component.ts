@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { RoutesPaths } from 'src/constants/routes-pathes';
@@ -36,11 +36,11 @@ export class ToolbarComponent implements OnInit {
 
     @Input() menuContainer: any;
 
-    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-    selectedLanguage?: string;
-    languages: { id: string; title: string }[] = [];
+    public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    public verticalPosition: MatSnackBarVerticalPosition = 'top';
+    public selectedLanguage?: string;
+    public languages: { id: string; title: string }[] = [];
+    public mouseOver = '';
 
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
@@ -65,6 +65,10 @@ export class ToolbarComponent implements OnInit {
 
     onHomeClick(): void {
         this.routingService.navigate(RoutesPaths.Posters);
+    }
+
+    onLoginClick(): void {
+        this.routingService.navigate(RoutesPaths.Login);
     }
 
     onShoppingCartClick(): void {

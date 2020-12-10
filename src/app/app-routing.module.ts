@@ -8,10 +8,12 @@ import { PosterDetailsComponent } from './main-content/poster-details/poster-det
 import { ShoppingCartComponent } from './main-content/shopping-cart/shopping-cart.component';
 import { RoutesPaths } from '../constants/routes-pathes';
 import { BuyPostersComponent } from './main-content/buy-posters/buy-posters.component';
+import { LoginComponent } from './main-content/login/login.component';
 
 const routes: Routes = [
     { path: '', redirectTo: `/${RoutesPaths.Posters}`, pathMatch: 'full' },
     { path: RoutesPaths.Posters, component: PostersComponent, data: { animation: RoutesPaths.Posters } },
+    { path: RoutesPaths.Login, component: LoginComponent, data: { animation: RoutesPaths.Login } },
     { path: RoutesPaths.BuyPosters, component: BuyPostersComponent, data: { animation: RoutesPaths.BuyPosters } },
     { path: RoutesPaths.Profile, component: ProfileComponent, data: { animation: RoutesPaths.Profile } },
     { path: RoutesPaths.Delivery, component: DeliveryComponent, data: { animation: RoutesPaths.Delivery } },

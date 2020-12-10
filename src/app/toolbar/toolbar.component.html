@@ -1,16 +1,35 @@
 <mat-toolbar color="primary" [class.mat-elevation-z9]="true">
     <button
-        [class.mat-elevation-z3]="true"
+        [class.mat-elevation-z3]="mouseOver === 'home'"
         mat-icon-button
         (click)="onHomeClick()"
+        (mouseenter)="mouseOver = 'home'"
+        (mouseleave)="mouseOver = ''"
         aria-label="Icon-button with menu icon"
     >
         <mat-icon>home</mat-icon>
     </button>
     <span class="logo">OLRx</span>
     <span class="spacer"></span>
-    <button mat-icon-button [matMenuTriggerFor]="menuContainer" aria-label="Icon-button with menu icon">
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuContainer"
+        [class.mat-elevation-z3]="mouseOver === 'menu'"
+        aria-label="Icon-button with menu icon"
+        (mouseenter)="mouseOver = 'menu'"
+        (mouseleave)="mouseOver = ''"
+    >
         <mat-icon>menu</mat-icon>
+    </button>
+    <button
+        mat-icon-button
+        aria-label="Icon-button with login icon"
+        (click)="onLoginClick()"
+        [class.mat-elevation-z3]="mouseOver === 'login'"
+        (mouseenter)="mouseOver = 'login'"
+        (mouseleave)="mouseOver = ''"
+    >
+        <mat-icon>login</mat-icon>
     </button>
     <select
         [class.mat-elevation-z1]="true"
@@ -20,7 +39,14 @@
     >
         <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
     </select>
-    <button mat-icon-button aria-label="Icon-button with heart icon" (click)="onShoppingCartClick()">
+    <button
+        mat-icon-button
+        aria-label="Icon-button with heart icon"
+        (click)="onShoppingCartClick()"
+        [class.mat-elevation-z3]="mouseOver === 'shopping_cart'"
+        (mouseenter)="mouseOver = 'shopping_cart'"
+        (mouseleave)="mouseOver = ''"
+    >
         <mat-icon>shopping_cart</mat-icon>
     </button>
 </mat-toolbar>
