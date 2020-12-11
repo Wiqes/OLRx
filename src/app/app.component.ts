@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
     selector: 'app-root',
@@ -9,8 +10,9 @@ import { slideInAnimation } from './animations';
     animations: [slideInAnimation],
 })
 export class AppComponent {
-    constructor() {}
-
+    constructor(private authService: AuthenticationService) {
+        this.authService.checkAuthToken();
+    }
     public title = 'olrxApp';
 
     getAnimationData(outlet: RouterOutlet): any {

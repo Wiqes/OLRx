@@ -9,7 +9,33 @@
     >
         <mat-icon>home</mat-icon>
     </button>
-    <span class="logo">OLRx</span>
+  <button
+    *ngIf="!authenticated"
+    class="login-button"
+    mat-raised-button
+    color="primary"
+    aria-label="login button"
+    (click)="onLoginClick()"
+    [class.mat-elevation-z5]="mouseOver === 'login'"
+    (mouseenter)="mouseOver = 'login'"
+    (mouseleave)="mouseOver = ''"
+  >
+    Login
+  </button>
+  <button
+    *ngIf="authenticated"
+    class="login-button"
+    mat-raised-button
+    color="primary"
+    aria-label="logout button"
+    (click)="onLogoutClick()"
+    [class.mat-elevation-z5]="mouseOver === 'login'"
+    (mouseenter)="mouseOver = 'login'"
+    (mouseleave)="mouseOver = ''"
+  >
+    Logout
+  </button>
+  <span class="logo">OLRx</span>
     <span class="spacer"></span>
     <button
         mat-icon-button
@@ -20,16 +46,6 @@
         (mouseleave)="mouseOver = ''"
     >
         <mat-icon>menu</mat-icon>
-    </button>
-    <button
-        mat-icon-button
-        aria-label="Icon-button with login icon"
-        (click)="onLoginClick()"
-        [class.mat-elevation-z3]="mouseOver === 'login'"
-        (mouseenter)="mouseOver = 'login'"
-        (mouseleave)="mouseOver = ''"
-    >
-        <mat-icon>login</mat-icon>
     </button>
     <select
         [class.mat-elevation-z1]="true"

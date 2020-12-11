@@ -13,7 +13,7 @@ import { RoutesPaths } from '../../../constants/routes-pathes';
 export class LoginComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
-        private authenticationService: AuthenticationService,
+        private authService: AuthenticationService,
         private routingService: RoutingService,
     ) {}
 
@@ -34,15 +34,17 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
         const { username, password } = this.profileForm.value;
-        this.authenticationService.login(username, password).subscribe(
+        this.authService.login(username, password).subscribe(
             ({ access_token }) => {
                 localStorage.setItem('authToken', access_token);
+                this.authService.setAuthTokenState();
                 this.routingService.navigate(RoutesPaths.Posters);
             },
             (err) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
                         localStorage.removeItem('authToken');
+                        this.authService.setAuthTokenState();
                     }
                 }
             },

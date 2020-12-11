@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { select, Store } from '@ngrx/store';
 import { PostersState } from 'src/store/reducers/posters.reducer';
 import { selectSnackbar } from 'src/store/selectors/snackbar.selectors';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
     selector: 'app-toolbar',
@@ -20,8 +21,10 @@ export class ToolbarComponent implements OnInit {
         private routingService: RoutingService,
         private translateService: TranslateService,
         private snackBar: MatSnackBar,
+        private authService: AuthenticationService,
         private store$: Store<PostersState>,
     ) {
+        this.authService.getAuthTokenState().subscribe((authenticated) => (this.authenticated = authenticated));
         this.store$.pipe(select(selectSnackbar)).subscribe((snackbarText) => {
             if (snackbarText) {
                 this.snackBar.open(snackbarText, 'Close', {
@@ -41,6 +44,7 @@ export class ToolbarComponent implements OnInit {
     public selectedLanguage?: string;
     public languages: { id: string; title: string }[] = [];
     public mouseOver = '';
+    public authenticated = false;
 
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
@@ -69,6 +73,10 @@ export class ToolbarComponent implements OnInit {
 
     onLoginClick(): void {
         this.routingService.navigate(RoutesPaths.Login);
+    }
+
+    onLogoutClick(): void {
+        this.authService.logout();
     }
 
     onShoppingCartClick(): void {

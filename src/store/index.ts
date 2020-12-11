@@ -8,14 +8,17 @@ import {
     shoppingCartPostersReducer,
     ShoppingCartPostersState,
 } from './reducers/shopping-cart.reducer';
+import { main, mainReducer, MainState } from './reducers/main.reducer';
 
 export interface State {
+    [main]: MainState;
     [posters]: PostersState;
     [shoppingCartPosters]: ShoppingCartPostersState;
     [snackbar]: SnackbarState;
 }
 
 export const reducers: ActionReducerMap<State> = {
+    [main]: mainReducer,
     [posters]: postersReducer,
     [shoppingCartPosters]: shoppingCartPostersReducer,
     [snackbar]: snackbarReducer,
