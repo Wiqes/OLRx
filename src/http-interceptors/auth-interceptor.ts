@@ -10,11 +10,10 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private routingService: RoutingService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // const authToken = this.auth.getAuthorizationToken();
-        const authToken =
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTYwNzYwODY1OCwiZXhwIjoxNjA3NjA5MjU4fQ.My5XsDmszNMgcysHzm633GicxK-yThiR5S-hGyi1s5I';
+        const authToken = localStorage.getItem('authToken');
+        const JWToken = `Bearer ${authToken}`;
 
-        const authReq = req.clone({ setHeaders: { Authorization: authToken } });
+        const authReq = req.clone({ setHeaders: { Authorization: JWToken } });
 
         // send cloned request with header to the next handler.
         return next.handle(authReq).pipe(

@@ -18,6 +18,14 @@ import { first } from 'rxjs/operators';
     providers: [PosterService, RoutingService, UploadFileService],
 })
 export class PosterFormComponent {
+    constructor(
+        private fb: FormBuilder,
+        @Inject(DOCUMENT) private document: Document,
+        private posterService: PosterService,
+        private routingService: RoutingService,
+        private uploadService: UploadFileService,
+    ) {}
+
     public profileForm = this.fb.group({
         title: ['', Validators.required],
         sellerName: ['', Validators.required],
@@ -30,14 +38,6 @@ export class PosterFormComponent {
     public message = '';
     public imageUrl = noPhotoUrl;
     private imageName = '';
-
-    constructor(
-        private fb: FormBuilder,
-        @Inject(DOCUMENT) private document: Document,
-        private posterService: PosterService,
-        private routingService: RoutingService,
-        private uploadService: UploadFileService,
-    ) {}
 
     get title(): any {
         return this.profileForm.get('title');
