@@ -1,14 +1,17 @@
 import { PostersActions, postersActionsType } from '../actions/posters.actions';
 import { Poster, Posters } from 'src/interfaces/poster.interface';
+import { AbleToBeUndefined } from 'src/interfaces/able-to-be-undefined.interface';
 
 export const posters = 'posters';
 
 export interface PostersState {
     posters: Posters;
+    currentPoster: AbleToBeUndefined<Poster>;
 }
 
 const initialState: PostersState = {
     posters: [],
+    currentPoster: null,
 };
 
 export const postersReducer = (state = initialState, action: PostersActions): PostersState => {
@@ -36,6 +39,10 @@ export const postersReducer = (state = initialState, action: PostersActions): Po
                         return poster;
                     }
                 }),
+                currentPoster:
+                    state.currentPoster && state.currentPoster?.id === action.payload?.posterId
+                        ? { ...state.currentPoster, isInShoppingCart: true }
+                        : state.currentPoster,
             };
         case postersActionsType.removeShoppingCartFlag:
             return {
@@ -50,11 +57,20 @@ export const postersReducer = (state = initialState, action: PostersActions): Po
                         return poster;
                     }
                 }),
+                currentPoster:
+                    state.currentPoster && state.currentPoster?.id === action.payload?.posterId
+                        ? { ...state.currentPoster, isInShoppingCart: false }
+                        : state.currentPoster,
             };
         case postersActionsType.getPosters:
             return {
                 ...state,
                 posters: action.payload?.posters ? [...action.payload?.posters] : [],
+            };
+        case postersActionsType.setCurrentPoster:
+            return {
+                ...state,
+                currentPoster: action.payload?.poster,
             };
         default:
             return state;
