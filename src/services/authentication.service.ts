@@ -42,6 +42,14 @@ export class AuthenticationService {
     }
 
     checkAuthToken(): void {
+        this.getAuthTokenState().subscribe((authenticated) => {
+            if (!authenticated) {
+                this.routingService.navigate(RoutesPaths.Login);
+            }
+        });
+    }
+
+    watchAuthToken(): void {
         this.subscription = this.router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
                 if (!this.router.navigated) {

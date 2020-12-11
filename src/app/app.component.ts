@@ -11,7 +11,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class AppComponent {
     constructor(private authService: AuthenticationService) {
-        this.authService.checkAuthToken();
+        this.authService.watchAuthToken();
     }
     public title = 'olrxApp';
 
