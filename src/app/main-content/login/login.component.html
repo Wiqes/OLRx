@@ -1,1 +1,19 @@
-<div class="login-form-container"></div>
+<div class="login-form-container"><form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput [formControl]="username" placeholder="Username" />
+      <mat-error *ngIf="username.hasError('required')"> Username is <strong>required</strong> </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [formControl]="password" placeholder="Password" />
+      <mat-error *ngIf="password.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Sign in</button>
+</form></div>

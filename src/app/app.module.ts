@@ -19,6 +19,7 @@ import { PosterEffects } from '../effects/poster.effects';
 import { InternationalizationModule } from './internationalization.module';
 import { MainContentModule } from './main-content/main-content.module';
 import { httpInterceptorProviders } from '../http-interceptors';
+import { AuthenticationService } from '../services/authentication.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -50,6 +51,7 @@ import { httpInterceptorProviders } from '../http-interceptors';
     providers: [
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
         httpInterceptorProviders,
+        AuthenticationService,
     ],
     bootstrap: [AppComponent],
 })

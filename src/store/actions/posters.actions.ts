@@ -7,6 +7,7 @@ export enum postersActionsType {
     addShoppingCartFlag = '[POSTERS] addFlag',
     removeShoppingCartFlag = '[POSTERS] removeFlag',
     getPosters = '[POSTERS] getPosters',
+    setCurrentPoster = '[POSTERS] setCurrentPoster',
 }
 
 interface Payload {
@@ -45,9 +46,16 @@ export class GetPosters implements Action {
     constructor(public payload?: Payload) {}
 }
 
+export class SetCurrentPoster implements Action {
+    readonly type: string = postersActionsType.setCurrentPoster;
+
+    constructor(public payload?: Payload) {}
+}
+
 export type PostersActions =
     | AddPosterAction
     | AddShoppingCartFlag
     | RemoveShoppingCartFlag
     | GetPosters
+    | SetCurrentPoster
     | RemovePosterAction;

@@ -4,6 +4,7 @@ import { RoutingService } from 'src/services/routing.service';
 import { RoutesPaths } from 'src/constants/routes-pathes';
 import { PosterService } from 'src/services/api/poster.service';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
+import { AbleToBeUndefined } from '../../../../interfaces/able-to-be-undefined.interface';
 
 @Component({
     selector: 'app-poster',
@@ -14,16 +15,16 @@ import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 export class PosterComponent implements OnInit, OnChanges {
     constructor(private routingService: RoutingService, private posterService: PosterService) {}
 
-    @Input() poster?: Poster;
+    @Input() poster?: AbleToBeUndefined<Poster>;
     @Input() details?: boolean;
     @Input() list?: boolean;
 
-    public imageUrl = filesUrl;
+    public imageUrl = noPhotoUrl;
 
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        const currentPhoto = changes.poster?.currentValue.photo;
+        const currentPhoto = changes.poster?.currentValue?.photo;
         if (currentPhoto) {
             this.imageUrl = `${filesUrl}${currentPhoto}`;
         } else {

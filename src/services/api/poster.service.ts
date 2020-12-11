@@ -9,9 +9,12 @@ import {
     GetPosters,
     RemovePosterAction,
     RemoveShoppingCartFlag,
+    SetCurrentPoster,
 } from 'src/store/actions/posters.actions';
 import { selectPoster } from 'src/store/selectors/posters.selectors';
 import { UploadFileService } from '../upload-file.service';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -54,5 +57,13 @@ export class PosterService {
         this.http.get(this.postersUrl).subscribe((posters: any) => {
             this.store$.dispatch(new GetPosters({ posters: posters.map((poster: any) => new Poster(poster)) }));
         });
+    }
+
+    getPosterById(posterId: string): Observable<any> {
+        return this.http.get(`${this.postersUrl}/${posterId}`).pipe(
+            tap((poster: any) => {
+                this.store$.dispatch(new SetCurrentPoster({ poster: new Poster(poster) }));
+            }),
+        );
     }
 }

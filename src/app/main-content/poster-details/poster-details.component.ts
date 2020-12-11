@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { PostersState } from 'src/store/reducers/posters.reducer';
-import { Observable } from 'rxjs';
-import { Poster, Posters } from 'src/interfaces/poster.interface';
-import { selectPosters } from 'src/store/selectors/posters.selectors';
+import { Poster } from 'src/interfaces/poster.interface';
+import { selectCurrentPoster, selectCurrentPosterFlag } from 'src/store/selectors/posters.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { PosterService } from 'src/services/api/poster.service';
 
@@ -14,8 +13,8 @@ import { PosterService } from 'src/services/api/poster.service';
     providers: [PosterService],
 })
 export class PosterDetailsComponent implements OnInit {
-    public posters$: Observable<Posters> = this.store$.pipe(select(selectPosters));
-    poster?: Poster;
+    public poster?: Poster;
+    public isInShoppingCart = false;
 
     constructor(
         private store$: Store<PostersState>,
@@ -25,7 +24,12 @@ export class PosterDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.subscribe(({ id }) => {
-            this.posters$.subscribe((posters) => (this.poster = posters.find((item) => item?.id === id)));
+            this.posterService.getPosterById(id).subscribe(() => {
+                this.store$.pipe(select(selectCurrentPoster)).subscribe((poster: any) => (this.poster = poster));
+                this.store$
+                    .pipe(select(selectCurrentPosterFlag))
+                    .subscribe((isInShoppingCart) => (this.isInShoppingCart = isInShoppingCart));
+            });
         });
     }
 
