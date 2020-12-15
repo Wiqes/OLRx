@@ -4,10 +4,12 @@ export const main = 'main';
 
 export interface MainState {
     authenticated: boolean;
+    username: string;
 }
 
 const initialState: MainState = {
     authenticated: false,
+    username: '',
 };
 
 export const mainReducer = (state = initialState, action: MainActions): MainState => {
@@ -16,6 +18,7 @@ export const mainReducer = (state = initialState, action: MainActions): MainStat
             return {
                 ...state,
                 authenticated: action.payload?.authenticated || false,
+                username: action.payload?.username || '',
             };
         default:
             return state;

@@ -6,6 +6,7 @@ export enum mainActionsType {
 
 interface Payload {
     authenticated?: boolean;
+    username?: string;
 }
 
 export class SetAuthStateAction implements Action {

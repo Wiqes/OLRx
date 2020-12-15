@@ -5,7 +5,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { SetAuthStateAction } from '../store/actions/main.actions';
 import { select, Store } from '@ngrx/store';
 import { MainState } from '../store/reducers/main.reducer';
-import { selectAuthState } from '../store/selectors/main.selectors';
+import { selectAuthState, selectUsername } from '../store/selectors/main.selectors';
 import { RoutesPaths } from '../constants/routes-pathes';
 import { RoutingService } from './routing.service';
 
@@ -28,17 +28,23 @@ export class AuthenticationService {
 
     logout(): void {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
         this.setAuthTokenState();
         this.routingService.navigate(RoutesPaths.Login);
     }
 
     setAuthTokenState(): void {
         const authenticated = Boolean(localStorage.getItem('authToken'));
-        this.store$.dispatch(new SetAuthStateAction({ authenticated }));
+        const username = String(localStorage.getItem('username'));
+        this.store$.dispatch(new SetAuthStateAction({ authenticated, username }));
     }
 
     getAuthTokenState(): Observable<boolean> {
         return this.store$.pipe(select(selectAuthState));
+    }
+
+    getUsername(): Observable<string> {
+        return this.store$.pipe(select(selectUsername));
     }
 
     checkAuthToken(): void {
