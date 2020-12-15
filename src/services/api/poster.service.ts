@@ -15,6 +15,7 @@ import { selectPoster } from 'src/store/selectors/posters.selectors';
 import { UploadFileService } from '../upload-file.service';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
     providedIn: 'root',
@@ -24,6 +25,7 @@ export class PosterService {
         private store$: Store<PostersState>,
         private http: HttpClient,
         private uploadFileService: UploadFileService,
+        private shoppingCartService: ShoppingCartService,
     ) {}
 
     private postersUrl = 'http://localhost:3000/posters';
@@ -46,6 +48,7 @@ export class PosterService {
     addShoppingCartFlag(posterId?: string): void {
         this.store$.dispatch(new AddShoppingCartFlag({ posterId }));
         this.http.put(`${this.postersUrl}/${posterId}`, { isInShoppingCart: true }).subscribe((response) => response);
+        this.shoppingCartService.addPoster(posterId);
     }
 
     removeShoppingCartFlag(posterId?: string): void {
