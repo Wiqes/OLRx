@@ -65,7 +65,7 @@ export class PosterFormComponent {
             photo: this.imageName,
             isInShoppingCart: false,
             sellerName,
-            price,
+            price: Number(price),
             description,
         });
 
