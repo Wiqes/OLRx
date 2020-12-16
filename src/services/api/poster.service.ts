@@ -36,13 +36,15 @@ export class PosterService {
     }
     removePoster(posterId?: string): void {
         this.http.delete(`${this.postersUrl}/${posterId}`).subscribe((response) => response);
-        this.store$
-            .pipe(select(selectPoster(posterId)))
-            .subscribe((poster) =>
+        this.store$.pipe(select(selectPoster(posterId))).subscribe((poster) => {
+            if (poster?.photo) {
                 this.uploadFileService
                     .removeFile(poster?.photo)
-                    .subscribe(() => this.store$.dispatch(new RemovePosterAction({ posterId }))),
-            );
+                    .subscribe(() => this.store$.dispatch(new RemovePosterAction({ posterId })));
+            } else {
+                this.store$.dispatch(new RemovePosterAction({ posterId }));
+            }
+        });
     }
 
     addShoppingCartFlag(posterId?: string): void {
