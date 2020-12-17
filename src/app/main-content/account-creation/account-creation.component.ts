@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
     selector: 'app-account-creation',
@@ -6,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./account-creation.component.scss'],
 })
 export class AccountCreationComponent implements OnInit {
-    constructor() {}
+    constructor(private authService: AuthenticationService) {}
 
     public buttonText = 'Create Account';
 
     ngOnInit(): void {}
 
     onSubmitted({ username, password }: { [key: string]: string }): void {
-        console.log(`${username} ${password}`);
+        this.authService.createUser(username, password);
     }
 }

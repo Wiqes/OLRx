@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { NavigationStart, Router } from '@angular/router';
 import { SetAuthStateAction } from '../store/actions/main.actions';
@@ -19,11 +19,35 @@ export class AuthenticationService {
         private store$: Store<MainState>,
         private routingService: RoutingService,
     ) {}
-    private loginUrl = 'http://localhost:3000/auth/login';
+    private authUrl = 'http://localhost:3000/auth';
+    private loginUrl = `${this.authUrl}/login`;
     private subscription?: Subscription;
 
-    login(username: string, password: string): Observable<any> {
-        return this.http.post(this.loginUrl, { username, password });
+    createUser(username: string, password: string): void {
+        this.http
+            .post<{ username: string; password: string }>(this.authUrl, { username, password })
+            .subscribe((response) => this.login(response.username, response.password));
+    }
+
+    login(username: string, password: string): void {
+        this.http.post(this.loginUrl, { username, password }).subscribe(
+            ({ access_token }: { access_token?: string }) => {
+                if (access_token) {
+                    localStorage.setItem('authToken', access_token);
+                }
+                localStorage.setItem('username', username);
+                this.setAuthTokenState();
+                this.routingService.navigate(RoutesPaths.Posters);
+            },
+            (err) => {
+                if (err instanceof HttpErrorResponse) {
+                    if (err.status === 401) {
+                        localStorage.removeItem('authToken');
+                        this.setAuthTokenState();
+                    }
+                }
+            },
+        );
     }
 
     logout(): void {
