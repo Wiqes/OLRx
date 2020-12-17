@@ -8,6 +8,7 @@ import { PosterViewDetailsModule } from './poster-details/poster-details.module'
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { BuyPostersModule } from './buy-posters/buy-posters.module';
 import { LoginModule } from './login/login.module';
+import { AccountCreationModule } from './account-creation/account-creation.module';
 
 @NgModule({
     declarations: [],
@@ -21,6 +22,7 @@ import { LoginModule } from './login/login.module';
         ShoppingCartModule,
         BuyPostersModule,
         LoginModule,
+        AccountCreationModule,
     ],
 })
 export class MainContentModule {}

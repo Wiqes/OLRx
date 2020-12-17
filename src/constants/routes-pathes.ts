@@ -7,4 +7,5 @@ export enum RoutesPaths {
     PosterAdding = 'poster-adding',
     PosterDetails = 'poster-details',
     ShoppingCart = 'shopping-cart',
+    AccountCreation = 'account-creation',
 }
