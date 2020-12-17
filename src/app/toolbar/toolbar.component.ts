@@ -75,6 +75,10 @@ export class ToolbarComponent implements OnInit {
         this.routingService.navigate(RoutesPaths.Login);
     }
 
+    onSignUpClick(): void {
+        this.routingService.navigate(RoutesPaths.AccountCreation);
+    }
+
     onLogoutClick(): void {
         this.authService.logout();
     }

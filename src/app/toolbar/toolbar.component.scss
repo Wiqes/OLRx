@@ -18,13 +18,16 @@
 .mat-toolbar {
   border: 4px double black;
 }
-
-.login-button {
+.sign-up-button,
+.auth-button {
   height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  margin: 0 40px 0 5px;
-  //border: 1px solid black;
+  margin-left: 5px;
+}
+
+.sign-up-button {
+  margin-right: 40px;
 }

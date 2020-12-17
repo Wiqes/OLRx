@@ -1,39 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/services/authentication.service';
+import { Component } from '@angular/core';
+import { RoutesPaths } from 'src/constants/routes-pathes';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RoutingService } from '../../../services/routing.service';
-import { RoutesPaths } from '../../../constants/routes-pathes';
+import { AuthenticationService } from 'src/services/authentication.service';
+import { RoutingService } from 'src/services/routing.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-    constructor(
-        private fb: FormBuilder,
-        private authService: AuthenticationService,
-        private routingService: RoutingService,
-    ) {}
+export class LoginComponent {
+    constructor(private authService: AuthenticationService, private routingService: RoutingService) {}
 
-    public profileForm = this.fb.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required],
-    });
+    public buttonText = 'Sign in';
 
-    get username(): any {
-        return this.profileForm.get('username');
-    }
-
-    get password(): any {
-        return this.profileForm.get('password');
-    }
-
-    ngOnInit(): void {}
-
-    onSubmit(): void {
-        const { username, password } = this.profileForm.value;
+    onSubmitted({ username, password }: { [key: string]: string }): void {
         this.authService.login(username, password).subscribe(
             ({ access_token }) => {
                 localStorage.setItem('authToken', access_token);
