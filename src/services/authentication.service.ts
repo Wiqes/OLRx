@@ -19,13 +19,14 @@ export class AuthenticationService {
         private store$: Store<MainState>,
         private routingService: RoutingService,
     ) {}
-    private authUrl = 'http://localhost:3000/auth';
-    private loginUrl = `${this.authUrl}/login`;
+    private serverUrl = 'http://localhost:3000';
+    private loginUrl = `${this.serverUrl}/auth/login`;
+    private createUserUrl = `${this.serverUrl}/users`;
     private subscription?: Subscription;
 
     createUser(username: string, password: string): void {
         this.http
-            .post<{ username: string; password: string }>(this.authUrl, { username, password })
+            .post<{ username: string; password: string }>(this.createUserUrl, { username, password })
             .subscribe((response) => this.login(response.username, response.password));
     }
 
