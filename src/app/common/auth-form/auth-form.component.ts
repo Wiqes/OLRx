@@ -1,17 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/services/authentication.service';
+import { Observable, of, Subject, Subscription } from 'rxjs';
+import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-auth-form',
     templateUrl: './auth-form.component.html',
     styleUrls: ['./auth-form.component.scss'],
 })
-export class AuthFormComponent implements OnInit {
-    constructor(private fb: FormBuilder) {}
+export class AuthFormComponent implements OnInit, OnDestroy {
+    constructor(private fb: FormBuilder, private route: ActivatedRoute, private authService: AuthenticationService) {
+        this.authService.getAuthError().subscribe((authError) => (this.errorMessage = authError));
+    }
 
-    @Input() buttonText = '';
     @Output() submitted = new EventEmitter<{ [key: string]: string }>();
 
+    private calls = new Subject();
+    private usernameValueSub?: Subscription;
+    private passwordValueSub?: Subscription;
+    public buttonText = '';
+    public errorMessage = false;
     public profileForm = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required],
@@ -25,9 +35,51 @@ export class AuthFormComponent implements OnInit {
         return this.profileForm.get('password');
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.usernameValueSub = this.username.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
+            if (this.errorMessage) {
+                this.authService.removeAuthError();
+            }
+        });
+        this.passwordValueSub = this.password.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
+            if (this.errorMessage) {
+                this.authService.removeAuthError();
+            }
+        });
+        this.authService.removeAuthError();
+
+        this.route.url.subscribe((urlSegment) => {
+            switch (urlSegment[0].path) {
+                case 'login':
+                    this.buttonText = 'Sign in';
+                    break;
+                case 'account-creation':
+                    this.buttonText = 'Create Account';
+                    break;
+                default:
+                    this.buttonText = '';
+                    break;
+            }
+        });
+    }
+
+    invokeDelay(): Observable<string> {
+        return of('').pipe(delay(1000));
+    }
 
     onSubmit(): void {
-        this.submitted.emit(this.profileForm.value);
+        this.calls.next(true);
+        this.invokeDelay()
+            .pipe(takeUntil(this.calls))
+            .subscribe(() => this.submitted.emit(this.profileForm.value));
+    }
+
+    onCloseClick(): void {
+        this.authService.removeAuthError();
+    }
+
+    ngOnDestroy(): void {
+        this.usernameValueSub?.unsubscribe();
+        this.passwordValueSub?.unsubscribe();
     }
 }

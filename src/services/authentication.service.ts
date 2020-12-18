@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { NavigationStart, Router } from '@angular/router';
-import { SetAuthStateAction } from '../store/actions/main.actions';
+import { SetAuthErrorAction, SetAuthStateAction } from '../store/actions/main.actions';
 import { select, Store } from '@ngrx/store';
 import { MainState } from '../store/reducers/main.reducer';
-import { selectAuthState, selectUsername } from '../store/selectors/main.selectors';
+import { selectAuthError, selectAuthState, selectUsername } from '../store/selectors/main.selectors';
 import { RoutesPaths } from '../constants/routes-pathes';
 import { RoutingService } from './routing.service';
 
@@ -37,12 +37,14 @@ export class AuthenticationService {
                     localStorage.setItem('authToken', access_token);
                 }
                 localStorage.setItem('username', username);
+                this.removeAuthError();
                 this.setAuthTokenState();
                 this.routingService.navigate(RoutesPaths.Posters);
             },
             (err) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
+                        this.addAuthError();
                         localStorage.removeItem('authToken');
                         this.setAuthTokenState();
                     }
@@ -62,6 +64,18 @@ export class AuthenticationService {
         const authenticated = Boolean(localStorage.getItem('authToken'));
         const username = String(localStorage.getItem('username'));
         this.store$.dispatch(new SetAuthStateAction({ authenticated, username }));
+    }
+
+    getAuthError(): Observable<boolean> {
+        return this.store$.pipe(select(selectAuthError));
+    }
+
+    addAuthError(): void {
+        this.store$.dispatch(new SetAuthErrorAction({ authenticationError: true }));
+    }
+
+    removeAuthError(): void {
+        this.store$.dispatch(new SetAuthErrorAction({ authenticationError: false }));
     }
 
     getAuthTokenState(): Observable<boolean> {

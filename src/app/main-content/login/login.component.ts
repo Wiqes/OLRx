@@ -9,8 +9,6 @@ import { AuthenticationService } from 'src/services/authentication.service';
 export class LoginComponent {
     constructor(private authService: AuthenticationService) {}
 
-    public buttonText = 'Sign in';
-
     onSubmitted({ username, password }: { [key: string]: string }): void {
         this.authService.login(username, password);
     }

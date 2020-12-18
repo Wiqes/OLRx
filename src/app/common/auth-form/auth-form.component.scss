@@ -14,4 +14,28 @@
 .login-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  border: 1px solid #64ffda;
+  color: #64ffda;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.mat-icon {
+  cursor: pointer;
+  margin-left: 5px;
+}
+.mat-icon:hover {
+  color: white;
 }

@@ -9,8 +9,6 @@ import { AuthenticationService } from 'src/services/authentication.service';
 export class AccountCreationComponent implements OnInit {
     constructor(private authService: AuthenticationService) {}
 
-    public buttonText = 'Create Account';
-
     ngOnInit(): void {}
 
     onSubmitted({ username, password }: { [key: string]: string }): void {
