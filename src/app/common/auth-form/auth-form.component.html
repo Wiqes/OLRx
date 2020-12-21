@@ -1,8 +1,8 @@
 <div class="login-form-container">
+    <div *ngIf="errorMessage" class="errorMessage">
+        Incorrect username or password.<mat-icon (click)="onCloseClick()">close</mat-icon>
+    </div>
     <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div *ngIf="errorMessage" class="errorMessage">
-            Incorrect username or password.<mat-icon (click)="onCloseClick()">close</mat-icon>
-        </div>
         <div class="center">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
