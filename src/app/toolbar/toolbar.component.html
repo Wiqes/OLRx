@@ -9,46 +9,46 @@
     >
         <mat-icon>home</mat-icon>
     </button>
-  <button
-    *ngIf="!authenticated"
-    class="auth-button"
-    mat-raised-button
-    color="primary"
-    aria-label="login button"
-    (click)="onLoginClick()"
-    [class.mat-elevation-z5]="mouseOver === 'login'"
-    (mouseenter)="mouseOver = 'login'"
-    (mouseleave)="mouseOver = ''"
-  >
-    Login
-  </button>
-  <button
-    *ngIf="!authenticated"
-    class="sign-up-button"
-    mat-raised-button
-    color="primary"
-    aria-label="sign up button"
-    (click)="onSignUpClick()"
-    [class.mat-elevation-z5]="mouseOver === 'sign-up'"
-    (mouseenter)="mouseOver = 'sign-up'"
-    (mouseleave)="mouseOver = ''"
-  >
-    Sign up
-  </button>
-  <button
-    *ngIf="authenticated"
-    class="auth-button"
-    mat-raised-button
-    color="primary"
-    aria-label="logout button"
-    (click)="onLogoutClick()"
-    [class.mat-elevation-z5]="mouseOver === 'login'"
-    (mouseenter)="mouseOver = 'login'"
-    (mouseleave)="mouseOver = ''"
-  >
-    Logout
-  </button>
-  <span class="logo">OLRx</span>
+    <button
+        *ngIf="!authenticated"
+        class="auth-button"
+        mat-raised-button
+        color="primary"
+        aria-label="login button"
+        (click)="onLoginClick()"
+        [class.mat-elevation-z5]="mouseOver === 'login'"
+        (mouseenter)="mouseOver = 'login'"
+        (mouseleave)="mouseOver = ''"
+    >
+        Login
+    </button>
+    <button
+        *ngIf="!authenticated"
+        class="sign-up-button"
+        mat-raised-button
+        color="primary"
+        aria-label="sign up button"
+        (click)="onSignUpClick()"
+        [class.mat-elevation-z5]="mouseOver === 'sign-up'"
+        (mouseenter)="mouseOver = 'sign-up'"
+        (mouseleave)="mouseOver = ''"
+    >
+        Sign up
+    </button>
+    <button
+        *ngIf="authenticated"
+        class="auth-button"
+        mat-raised-button
+        color="primary"
+        aria-label="logout button"
+        (click)="onLogoutClick()"
+        [class.mat-elevation-z5]="mouseOver === 'login'"
+        (mouseenter)="mouseOver = 'login'"
+        (mouseleave)="mouseOver = ''"
+    >
+        Logout
+    </button>
+    <span class="logo">OLRx</span>
     <span class="spacer"></span>
     <button
         mat-icon-button

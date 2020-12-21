@@ -5,4 +5,29 @@
 button {
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  width: 100%;
+  height: 100%;
 }
+
+.spinner-butt {
+  cursor: not-allowed;
+}
+
+.button-content {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inv-text {
+  opacity: 0;
+}
+
+.mat-spinner {
+  position: absolute;
+}
+

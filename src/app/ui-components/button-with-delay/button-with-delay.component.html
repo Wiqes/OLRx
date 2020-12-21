@@ -1,2 +1,9 @@
-<button mat-raised-button color="primary"><mat-spinner diameter="20" color="accent"></mat-spinner></button>
-
+<button *ngIf="waiting" mat-raised-button color="primary" class="spinner-butt" type="button" [color]="color">
+    <div class="button-content">
+        <mat-spinner diameter="20" [color]="color === 'primary' ? 'accent' : 'primary'"></mat-spinner>
+        <div class="inv-text">{{ text }}</div>
+    </div>
+</button>
+<button *ngIf="!waiting" id="butt" mat-raised-button (click)="onButtonClick($event)" [color]="color" [type]="type">
+    {{ text }}
+</button>

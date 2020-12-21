@@ -15,7 +15,8 @@ export class PosterDetailsFABComponent implements OnInit, OnChanges {
 
     ngOnInit(): void {}
 
-    onAddToCartClick(): void {
+    onAddToCartClick(event: MouseEvent): void {
+        console.log(event);
         this.fabClicked.emit();
     }
 

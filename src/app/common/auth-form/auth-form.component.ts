@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { Observable, of, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'app-auth-form',
@@ -17,7 +17,6 @@ export class AuthFormComponent implements OnInit, OnDestroy {
 
     @Output() submitted = new EventEmitter<{ [key: string]: string }>();
 
-    private calls = new Subject();
     private usernameValueSub?: Subscription;
     private passwordValueSub?: Subscription;
     public buttonText = '';
@@ -63,15 +62,8 @@ export class AuthFormComponent implements OnInit, OnDestroy {
         });
     }
 
-    invokeDelay(): Observable<string> {
-        return of('').pipe(delay(1000));
-    }
-
     onSubmit(): void {
-        this.calls.next(true);
-        this.invokeDelay()
-            .pipe(takeUntil(this.calls))
-            .subscribe(() => this.submitted.emit(this.profileForm.value));
+        this.submitted.emit(this.profileForm.value);
     }
 
     onCloseClick(): void {
