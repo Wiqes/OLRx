@@ -17,9 +17,8 @@
                 <mat-error *ngIf="password.hasError('required')"> Password is <strong>required</strong> </mat-error>
             </mat-form-field>
         </div>
-        <!--<button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">
-            {{ buttonText }}
-        </button>-->
-        <app-button-with-delay type="submit" [text]="buttonText"></app-button-with-delay>
+        <div class="center">
+            <app-button-with-delay type="submit" [text]="buttonText"></app-button-with-delay>
+        </div>
     </form>
 </div>

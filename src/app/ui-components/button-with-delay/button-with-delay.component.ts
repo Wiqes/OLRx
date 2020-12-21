@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { delay, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
@@ -15,6 +15,7 @@ export class ButtonWithDelayComponent implements OnInit {
     @Input() text = 'Button';
     @Input() type = 'button';
     @Input() color: ThemePalette = 'primary';
+    @Output() clicked = new EventEmitter<MouseEvent>();
 
     public waiting = false;
     private calls = new Subject();
@@ -27,7 +28,7 @@ export class ButtonWithDelayComponent implements OnInit {
 
     onButtonClick(event: MouseEvent): void {
         if (!this.waiting) {
-            console.log('dfdfdf');
+            this.clicked.emit(event);
         }
         this.waiting = true;
         const buttonElement: HTMLElement = this.document.getElementById('butt') as HTMLElement;
