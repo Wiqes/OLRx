@@ -5,6 +5,7 @@ import { Poster } from 'src/interfaces/poster.interface';
 import { selectCurrentPoster, selectCurrentPosterFlag } from 'src/store/selectors/posters.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { PosterService } from 'src/services/api/poster.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
     selector: 'app-poster-details',
@@ -20,7 +21,10 @@ export class PosterDetailsComponent implements OnInit {
         private store$: Store<PostersState>,
         private route: ActivatedRoute,
         private posterService: PosterService,
-    ) {}
+        private authService: AuthenticationService,
+    ) {
+        this.authService.checkAuthToken();
+    }
 
     ngOnInit(): void {
         this.route.params.subscribe(({ id }) => {
