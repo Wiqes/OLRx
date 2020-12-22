@@ -1,6 +1,9 @@
 <div class="login-form-container">
-    <div *ngIf="errorMessage" class="errorMessage">
+    <div *ngIf="authErrorMessage" class="authErrorMessage">
         Incorrect username or password.<mat-icon (click)="onCloseClick()">close</mat-icon>
+    </div>
+    <div *ngIf="createUserError" class="authErrorMessage">
+      {{createUserError}}.<mat-icon (click)="onCreateUserErrorCloseClick()">close</mat-icon>
     </div>
     <form class="login-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
         <div class="center">
