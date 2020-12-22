@@ -21,17 +21,17 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     private passwordValueSub?: Subscription;
     public buttonText = '';
     public errorMessage = false;
-    public profileForm = this.fb.group({
+    public authForm = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required],
     });
 
     get username(): any {
-        return this.profileForm.get('username');
+        return this.authForm.get('username');
     }
 
     get password(): any {
-        return this.profileForm.get('password');
+        return this.authForm.get('password');
     }
 
     ngOnInit(): void {
@@ -63,7 +63,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
-        this.submitted.emit(this.profileForm.value);
+        this.submitted.emit(this.authForm.value);
     }
 
     onCloseClick(): void {

@@ -26,7 +26,7 @@ export class PosterFormComponent {
         private uploadService: UploadFileService,
     ) {}
 
-    public profileForm = this.fb.group({
+    public posterForm = this.fb.group({
         title: ['', Validators.required],
         sellerName: ['', Validators.required],
         price: ['', [Validators.required, Validators.pattern('\\d+')]],
@@ -40,23 +40,23 @@ export class PosterFormComponent {
     private imageName = '';
 
     get title(): any {
-        return this.profileForm.get('title');
+        return this.posterForm.get('title');
     }
 
     get sellerName(): any {
-        return this.profileForm.get('sellerName');
+        return this.posterForm.get('sellerName');
     }
 
     get price(): any {
-        return this.profileForm.get('price');
+        return this.posterForm.get('price');
     }
 
     get description(): any {
-        return this.profileForm.get('description');
+        return this.posterForm.get('description');
     }
 
     onSubmit(): void {
-        const { title, sellerName, price, description } = this.profileForm.value;
+        const { title, sellerName, price, description } = this.posterForm.value;
 
         // the id should be unique and generated on the server-side
         this.posterService.addPoster({
