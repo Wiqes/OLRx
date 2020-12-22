@@ -15,6 +15,7 @@ export class ButtonWithDelayComponent implements OnInit {
     @Input() text = 'Button';
     @Input() type = 'button';
     @Input() color: ThemePalette = 'primary';
+    @Input() disabled = false;
     @Output() clicked = new EventEmitter<MouseEvent>();
 
     public waiting = false;

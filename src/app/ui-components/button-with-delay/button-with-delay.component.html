@@ -4,6 +4,6 @@
         <div class="inv-text">{{ text }}</div>
     </div>
 </button>
-<button *ngIf="!waiting" id="butt" mat-raised-button (click)="onButtonClick($event)" [color]="color" [type]="type">
+<button *ngIf="!waiting" id="butt" mat-raised-button (click)="onButtonClick($event)" [color]="color" [type]="type" [disabled]="disabled">
     {{ text }}
 </button>

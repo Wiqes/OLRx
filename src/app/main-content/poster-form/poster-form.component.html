@@ -10,7 +10,7 @@
             <mat-icon>edit</mat-icon>
         </button>
     </div>
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="posterForm" (ngSubmit)="onSubmit()">
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Title</mat-label>
@@ -44,6 +44,6 @@
             </mat-form-field>
         </div>
 
-        <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Add poster</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!posterForm.valid">Add poster</button>
     </form>
 </div>

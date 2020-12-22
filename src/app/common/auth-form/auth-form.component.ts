@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { CreateUserService } from 'src/services/create-user.service';
 
 @Component({
     selector: 'app-auth-form',
@@ -11,8 +11,16 @@ import { debounceTime } from 'rxjs/operators';
     styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent implements OnInit, OnDestroy {
-    constructor(private fb: FormBuilder, private route: ActivatedRoute, private authService: AuthenticationService) {
-        this.authService.getAuthError().subscribe((authError) => (this.errorMessage = authError));
+    constructor(
+        private fb: FormBuilder,
+        private route: ActivatedRoute,
+        private authService: AuthenticationService,
+        private createUserService: CreateUserService,
+    ) {
+        this.authService.getAuthError().subscribe((authError) => (this.authErrorMessage = authError));
+        this.createUserService.createUserError$.subscribe(
+            (createUserError) => (this.createUserError = createUserError),
+        );
     }
 
     @Output() submitted = new EventEmitter<{ [key: string]: string }>();
@@ -20,29 +28,37 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     private usernameValueSub?: Subscription;
     private passwordValueSub?: Subscription;
     public buttonText = '';
-    public errorMessage = false;
-    public profileForm = this.fb.group({
+    public authErrorMessage = false;
+    public createUserError = '';
+    public authForm = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required],
     });
 
     get username(): any {
-        return this.profileForm.get('username');
+        return this.authForm.get('username');
     }
 
     get password(): any {
-        return this.profileForm.get('password');
+        return this.authForm.get('password');
     }
 
     ngOnInit(): void {
-        this.usernameValueSub = this.username.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-            if (this.errorMessage) {
+        // this.usernameValueSub = this.username.valueChanges.pipe(debounceTime(1500)).subscribe(() => {
+        this.usernameValueSub = this.username.valueChanges.subscribe(() => {
+            if (this.authErrorMessage) {
                 this.authService.removeAuthError();
             }
+            if (this.createUserError) {
+                this.createUserService.cleanCreateUserError();
+            }
         });
-        this.passwordValueSub = this.password.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-            if (this.errorMessage) {
+        this.passwordValueSub = this.password.valueChanges.subscribe(() => {
+            if (this.authErrorMessage) {
                 this.authService.removeAuthError();
+            }
+            if (this.createUserError) {
+                this.createUserService.cleanCreateUserError();
             }
         });
         this.authService.removeAuthError();
@@ -63,11 +79,15 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(): void {
-        this.submitted.emit(this.profileForm.value);
+        this.submitted.emit(this.authForm.value);
     }
 
     onCloseClick(): void {
         this.authService.removeAuthError();
+    }
+
+    onCreateUserErrorCloseClick(): void {
+        this.createUserService.cleanCreateUserError();
     }
 
     ngOnDestroy(): void {

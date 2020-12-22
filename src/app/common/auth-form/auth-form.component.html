@@ -1,8 +1,11 @@
 <div class="login-form-container">
-    <div *ngIf="errorMessage" class="errorMessage">
+    <div *ngIf="authErrorMessage" class="authErrorMessage">
         Incorrect username or password.<mat-icon (click)="onCloseClick()">close</mat-icon>
     </div>
-    <form class="login-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="createUserError" class="authErrorMessage">
+      {{createUserError}}.<mat-icon (click)="onCreateUserErrorCloseClick()">close</mat-icon>
+    </div>
+    <form class="login-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
         <div class="center">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
@@ -18,7 +21,7 @@
             </mat-form-field>
         </div>
         <div class="center">
-            <app-button-with-delay type="submit" [text]="buttonText"></app-button-with-delay>
+            <app-button-with-delay type="submit" [text]="buttonText" [disabled]="!authForm.valid"></app-button-with-delay>
         </div>
     </form>
 </div>

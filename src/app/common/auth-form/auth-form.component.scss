@@ -24,7 +24,7 @@
   justify-content: center;
 }
 
-.errorMessage {
+.authErrorMessage {
   display: flex;
   align-items: center;
   position: absolute;
@@ -44,5 +44,6 @@
 }
 
 app-button-with-delay {
-  width: 50%;
+  width: auto;
+  min-width: 50%;
 }
