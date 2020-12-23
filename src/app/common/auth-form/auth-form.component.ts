@@ -31,8 +31,16 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     public authErrorMessage = false;
     public createUserError = '';
     public authForm = this.fb.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required],
+        username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+        password: [
+            '',
+            [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(20),
+                Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].+'),
+            ],
+        ],
     });
 
     get username(): any {
