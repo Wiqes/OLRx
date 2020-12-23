@@ -11,6 +11,8 @@
                 <mat-label>Username</mat-label>
                 <input type="text" matInput [formControl]="username" placeholder="Username" />
                 <mat-error *ngIf="username.hasError('required')"> Username is <strong>required</strong> </mat-error>
+                <mat-error *ngIf="username.hasError('minlength')"> Should contain at least <strong>4</strong> letters</mat-error>
+                <mat-error *ngIf="username.hasError('maxlength')"> Username is too big</mat-error>
             </mat-form-field>
         </div>
         <div class="center">
@@ -18,6 +20,9 @@
                 <mat-label>Password</mat-label>
                 <input type="password" matInput [formControl]="password" placeholder="Password" />
                 <mat-error *ngIf="password.hasError('required')"> Password is <strong>required</strong> </mat-error>
+              <mat-error *ngIf="password.hasError('minlength')"> Should contain at least <strong>8</strong> letters</mat-error>
+              <mat-error *ngIf="password.hasError('maxlength')"> Password is too big</mat-error>
+              <mat-error *ngIf="password.hasError('pattern')"> Password is too weak</mat-error>
             </mat-form-field>
         </div>
         <div class="center">
