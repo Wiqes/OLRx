@@ -10,18 +10,15 @@ Run `npm run start`
 
 ## Authentication
 
-            {
-                userId: 1,
+            {                
                 username: 'john',
-                password: 'changeme',
+                password: 'qwertyY5%',
             },
             {
-                userId: 2,
-                username: 'chris',
-                password: 'secret',
+                username: 'wiqes',
+                password: 'qwertyY5%',
             },
             {
-                userId: 3,
-                username: 'maria',
-                password: 'guess',
+                username: 'azratiel',
+                password: 'qwertyY5%',
             }
