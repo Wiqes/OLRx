@@ -21,7 +21,7 @@ export class ShoppingCartService {
         });
     }
 
-    removePoster(posterId: string): void {
+    removePoster(posterId?: string): void {
         this.store$.dispatch(new RemoveShoppingCartPoster({ posterId }));
         this.http.put(`${this.shoppingCartUrl}/remove`, { posterId }).subscribe((response) => response);
     }
