@@ -5,7 +5,7 @@ import { Poster } from 'src/interfaces/poster.interface';
 import { selectCurrentPoster, selectCurrentPosterFlag } from 'src/store/selectors/posters.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { PosterService } from 'src/services/api/poster.service';
-import { AuthenticationService } from '../../../services/authentication.service';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
     selector: 'app-poster-details',
