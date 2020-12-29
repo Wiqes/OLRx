@@ -23,10 +23,10 @@ export class ShoppingCartService {
 
     removePoster(posterId?: string): void {
         this.store$.dispatch(new RemoveShoppingCartPoster({ posterId }));
-        this.http.put(`${this.shoppingCartUrl}/remove`, { posterId }).subscribe((response) => response);
+        this.http.put(`${this.shoppingCartUrl}/remove/${posterId}`, {}).subscribe((response) => response);
     }
 
     addPoster(posterId?: string): void {
-        this.http.put(`${this.shoppingCartUrl}/add`, { posterId }).subscribe((response) => response);
+        this.http.put(`${this.shoppingCartUrl}/add/${posterId}`, {}).subscribe((response) => response);
     }
 }

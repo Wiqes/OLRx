@@ -49,13 +49,11 @@ export class PosterService {
 
     addShoppingCartFlag(posterId?: string): void {
         this.store$.dispatch(new AddShoppingCartFlag({ posterId }));
-        this.http.put(`${this.postersUrl}/${posterId}`, { isInShoppingCart: true }).subscribe((response) => response);
         this.shoppingCartService.addPoster(posterId);
     }
 
     removeShoppingCartFlag(posterId?: string): void {
         this.store$.dispatch(new RemoveShoppingCartFlag({ posterId }));
-        this.http.put(`${this.postersUrl}/${posterId}`, { isInShoppingCart: false }).subscribe((response) => response);
         this.shoppingCartService.removePoster(posterId);
     }
 
