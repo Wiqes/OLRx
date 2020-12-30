@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { RoutingService } from 'src/services/routing.service';
 import { RoutesPaths } from 'src/constants/routes-pathes';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'app-menu',
@@ -12,13 +13,17 @@ import { RoutesPaths } from 'src/constants/routes-pathes';
     providers: [PosterService, RoutingService],
 })
 export class MenuComponent implements OnInit {
-    isPostersPage?: boolean;
+    public isPostersPage?: boolean;
+    private username = '';
 
     constructor(
         private posterService: PosterService,
         private routingService: RoutingService,
         private translateService: TranslateService,
-    ) {}
+        private authService: AuthenticationService,
+    ) {
+        this.authService.getUsername().subscribe((username) => (this.username = username));
+    }
 
     ngOnInit(): void {
         this.translateService.use(environment.defaultLocale);
@@ -52,6 +57,7 @@ export class MenuComponent implements OnInit {
             sellerName: 'Sellers Name',
             price: 220,
             description: 'Some some some some some some some',
+            creator: this.username,
         });
     }
 }

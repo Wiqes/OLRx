@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PosterService } from 'src/services/api/poster.service';
 import { RoutingService } from 'src/services/routing.service';
@@ -8,8 +8,9 @@ import { UploadFileService } from 'src/services/upload-file.service';
 import { AbleToBeUndefined } from 'src/interfaces/able-to-be-undefined.interface';
 import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
     selector: 'app-poster-form',
@@ -17,15 +18,7 @@ import { first } from 'rxjs/operators';
     styleUrls: ['./poster-form.component.scss'],
     providers: [PosterService, RoutingService, UploadFileService],
 })
-export class PosterFormComponent {
-    constructor(
-        private fb: FormBuilder,
-        @Inject(DOCUMENT) private document: Document,
-        private posterService: PosterService,
-        private routingService: RoutingService,
-        private uploadService: UploadFileService,
-    ) {}
-
+export class PosterFormComponent implements OnDestroy {
     public posterForm = this.fb.group({
         title: ['', Validators.required],
         sellerName: ['', Validators.required],
@@ -38,6 +31,22 @@ export class PosterFormComponent {
     public message = '';
     public imageUrl = noPhotoUrl;
     private imageName = '';
+    private username = '';
+    private destroy$ = new Subject<void>();
+
+    constructor(
+        private fb: FormBuilder,
+        @Inject(DOCUMENT) private document: Document,
+        private posterService: PosterService,
+        private routingService: RoutingService,
+        private uploadService: UploadFileService,
+        private authService: AuthenticationService,
+    ) {
+        this.authService
+            .getUsername()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((username) => (this.username = username));
+    }
 
     get title(): any {
         return this.posterForm.get('title');
@@ -67,6 +76,7 @@ export class PosterFormComponent {
             sellerName,
             price: Number(price),
             description,
+            creator: this.username,
         });
 
         this.routingService.navigate(RoutesPaths.Posters);
@@ -76,7 +86,7 @@ export class PosterFormComponent {
         const fileInput = this.document.createElement('input');
         fileInput.type = 'file';
         fromEvent(fileInput, 'change')
-            .pipe(first())
+            .pipe(first(), takeUntil(this.destroy$))
             .subscribe(
                 (event) => {
                     const target = event.target as HTMLInputElement;
@@ -105,5 +115,10 @@ export class PosterFormComponent {
                 () => console.log('Upload completed'),
             );
         fileInput.click();
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }
