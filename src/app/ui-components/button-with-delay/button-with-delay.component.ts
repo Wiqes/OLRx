@@ -10,8 +10,6 @@ import { ThemePalette } from '@angular/material/core';
     styleUrls: ['./button-with-delay.component.scss'],
 })
 export class ButtonWithDelayComponent implements OnInit {
-    constructor(@Inject(DOCUMENT) private document: Document) {}
-
     @Input() text = 'Button';
     @Input() type = 'button';
     @Input() color: ThemePalette = 'primary';
@@ -20,6 +18,8 @@ export class ButtonWithDelayComponent implements OnInit {
 
     public waiting = false;
     private calls = new Subject();
+
+    constructor(@Inject(DOCUMENT) private document: Document) {}
 
     ngOnInit(): void {}
 

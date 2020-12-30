@@ -10,6 +10,7 @@ import { filesUrl, noPhotoUrl } from 'src/constants/urls';
 import { DOCUMENT } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
     selector: 'app-poster-form',
@@ -24,7 +25,10 @@ export class PosterFormComponent {
         private posterService: PosterService,
         private routingService: RoutingService,
         private uploadService: UploadFileService,
-    ) {}
+        private authService: AuthenticationService,
+    ) {
+        this.authService.getUsername().subscribe((username) => (this.username = username));
+    }
 
     public posterForm = this.fb.group({
         title: ['', Validators.required],
@@ -38,6 +42,7 @@ export class PosterFormComponent {
     public message = '';
     public imageUrl = noPhotoUrl;
     private imageName = '';
+    private username = '';
 
     get title(): any {
         return this.posterForm.get('title');
@@ -67,6 +72,7 @@ export class PosterFormComponent {
             sellerName,
             price: Number(price),
             description,
+            creator: this.username,
         });
 
         this.routingService.navigate(RoutesPaths.Posters);

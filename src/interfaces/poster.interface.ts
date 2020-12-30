@@ -5,6 +5,7 @@ export class Poster {
     sellerName = '';
     price = 0;
     description = '';
+    creator: string;
     photo?: string;
 
     constructor(data: any) {
@@ -14,6 +15,7 @@ export class Poster {
         this.sellerName = data.sellerName;
         this.price = Number(data.price);
         this.description = data.description;
+        this.creator = data.creator;
         this.photo = data.photo;
     }
 }
