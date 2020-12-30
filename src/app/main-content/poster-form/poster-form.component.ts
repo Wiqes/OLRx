@@ -42,7 +42,10 @@ export class PosterFormComponent implements OnDestroy {
         private uploadService: UploadFileService,
         private authService: AuthenticationService,
     ) {
-        this.authService.getUsername().subscribe((username) => (this.username = username));
+        this.authService
+            .getUsername()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((username) => (this.username = username));
     }
 
     get title(): any {
